@@ -14,8 +14,7 @@
 
 <script>
 	
-	var canvas, mouse;
-	var square;
+	var canvas, square;
 	
 	init();
 	animate();
@@ -35,6 +34,8 @@
 	function animate () {
 		
 		requestAnimationFrame( animate );
+		
+		square.rotation += 0.02;
 		canvas.render();
 	}
 	
