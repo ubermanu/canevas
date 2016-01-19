@@ -36,3 +36,5 @@ Canvas renderer based on THREE.js code format
 	
 </script>
 ```
+
+You should see [this](http://g.recordit.co/zSlm2pmh2C.gif) in less blurry
