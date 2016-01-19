@@ -1,0 +1,41 @@
+<script src="src/Silk.js"></script>
+
+<script src="src/math/Vector2.js"></script>
+<script src="src/math/Color.js"></script>
+
+<script src="src/core/Object2D.js"></script>
+<script src="src/core/Canvas.js"></script>
+
+<script src="src/objects/Rect.js"></script>
+<script src="src/objects/Circle.js"></script>
+<script src="src/objects/Triangle.js"></script>
+
+<body style="margin:0px"></body>
+
+<script>
+	
+	var canvas, mouse;
+	var square;
+	
+	init();
+	animate();
+	
+	function init () {
+		
+		canvas = new SILK.Canvas();
+		canvas.setSize( window.innerWidth, window.innerHeight );
+		
+		square = new SILK.Rect({ width: 80, height: 80, wireframe: true, color: 0xff0000 });
+		square.position.set( window.innerWidth / 2, window.innerHeight / 2 );
+		canvas.add( square );
+		
+		document.body.appendChild( canvas.domElement );
+	}
+	
+	function animate () {
+		
+		requestAnimationFrame( animate );
+		canvas.render();
+	}
+	
+</script>
