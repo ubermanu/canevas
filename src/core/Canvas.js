@@ -42,7 +42,7 @@ SILK.Canvas = function () {
 			
 		} else {
 			
-			console.error( "SILK.Canvas.add: object not an instance of SILK.Object2D.", object );
+			console.error( "SILK.Canvas.add: object is not an instance of SILK.Object2D", object );
 		}
 		
 		return this;
