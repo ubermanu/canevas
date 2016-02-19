@@ -26,7 +26,7 @@ SILK.Object2D.prototype = {
 		
 		if ( ! this.visible ) return;
 		
-		// if ( this.rotation > Math.PI * 2 ) this.rotation = 0;
+		if ( this.rotation > Math.PI * 2 ) this.rotation = 0;
 		
 		context.save();
 		context.translate( this.position.x, this.position.y );
