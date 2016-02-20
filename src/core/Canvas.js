@@ -28,19 +28,32 @@ SILK.Canvas = function () {
 	
 	// render
 	
-	this.render = function ( scene ) {
+	this.render = function ( scene, camera ) {
 		
-		if ( scene instanceof SILK.Scene ) {
-			
-			if ( this.autoClear == true ) this.clear();
-			
-			for ( var i = 0; i < scene.children.length; i++ ) {
-				scene.children[ i ].render( _context );
-			}
-			
-		} else {
-			
+		if ( ! ( scene instanceof SILK.Scene )) {
 			console.error( "SILK.Canvas.render: scene is not an instance of SILK.Scene", scene );
+			return;
 		}
+		
+		if ( ! ( camera instanceof SILK.Camera )) {
+			console.error( "SILK.Canvas.render: camera is not an instance of SILK.Camera", camera );
+			return;
+		}
+		
+		if ( this.autoClear == true ) this.clear();
+		
+		// load camera context
+		_context.save();
+		_context.scale( camera.zoom, camera.zoom );
+		_context.translate( camera.position.x, camera.position.y );
+		_context.rotate( camera.rotation );
+		
+		// render scene objects
+		for ( var i = 0; i < scene.children.length; i++ ) {
+			scene.children[ i ].render( _context );
+		}
+		
+		// restore camera context
+		_context.restore();
 	};
 }
