@@ -5,11 +5,12 @@ Canvas renderer based on THREE.js code format
 ### Usage ###
 
 ```html
-<script src="silk.js"></script>
+<script src="silk.min.js"></script>
 
 <script>
 	
-	var canvas, square;
+	var canvas, scene, camera;
+	var square;
 	
 	init();
 	animate();
@@ -19,9 +20,13 @@ Canvas renderer based on THREE.js code format
 		canvas = new SILK.Canvas();
 		canvas.setSize( window.innerWidth, window.innerHeight );
 		
+		camera = new SILK.Camera();
+		camera.position.set( window.innerWidth / 2, window.innerHeight / 2 );
+		
+		scene = new SILK.Scene();
+		
 		square = new SILK.Rect({ width: 80, height: 80, wireframe: true, color: 0xff0000 });
-		square.position.set( window.innerWidth / 2, window.innerHeight / 2 );
-		canvas.add( square );
+		scene.add( square );
 		
 		document.body.appendChild( canvas.domElement );
 	}
@@ -31,7 +36,7 @@ Canvas renderer based on THREE.js code format
 		requestAnimationFrame( animate );
 		
 		square.rotation += 0.02;
-		canvas.render();
+		canvas.render( scene, camera );
 	}
 	
 </script>
