@@ -4,18 +4,18 @@ SILK.Object2D = function ( options ) {
 	
 	options = options || {};
 	
-	this.type = 'Object2D';
-	this.parent = null;
+	this.type 		= 'Object2D';
+	this.parent 	= null;
 	
-	this.position = new SILK.Vector2();
-	this.rotation = 0;
-	this.scale = 1;
+	this.position 	= options.position !== undefined ? options.position : new SILK.Vector2();
+	this.rotation 	= options.rotation !== undefined ? options.rotation : 0;
+	this.scale 		= options.scale !== undefined ? options.scale : 1;
 	
-	this.visible = true;
-	this.wireframe = options.wireframe !== undefined ? options.wireframe : false;
+	this.visible 	= options.visible !== undefined ? options.visible : true;
+	this.wireframe 	= options.wireframe !== undefined ? options.wireframe : false;
 	
-	var _color = options.color !== undefined ? options.color : 0x000000;
-	this.color = new SILK.Color( _color );
+	var _color 		= options.color !== undefined ? options.color : 0x000000;
+	this.color 		= new SILK.Color( _color );
 };
 
 SILK.Object2D.prototype = {
@@ -29,6 +29,7 @@ SILK.Object2D.prototype = {
 		if ( this.rotation > Math.PI * 2 ) this.rotation = 0;
 		
 		context.save();
+		context.scale( this.scale, this.scale );
 		context.translate( this.position.x, this.position.y );
 		context.rotate( this.rotation );
 	}
