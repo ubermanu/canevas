@@ -1,6 +1,6 @@
 silk.js
 ========
-Canvas renderer based on THREE.js code format
+2D Canvas renderer based on [THREE.js](https://github.com/mrdoob/three.js) format
 
 ### Usage ###
 
