@@ -1,5 +1,15 @@
 /*! silk.js 2016-02-20 */
 var SILK = { VERSION: '0' };
+SILK.Camera = function ( options ) {
+	
+	options = options || {};
+	
+	this.type = 'Camera';
+	
+	this.position = options.position !== undefined ? options.position : new SILK.Vector2();
+	this.rotation = options.rotation !== undefined ? options.rotation : 0;
+	this.zoom     = options.zoom !== undefined ? options.zoom : 1;
+};
 SILK.Canvas = function () {
 	
 	console.log( 'SILK.Canvas', SILK.VERSION );
@@ -30,20 +40,33 @@ SILK.Canvas = function () {
 	
 	// render
 	
-	this.render = function ( scene ) {
+	this.render = function ( scene, camera ) {
 		
-		if ( scene instanceof SILK.Scene ) {
-			
-			if ( this.autoClear == true ) this.clear();
-			
-			for ( var i = 0; i < scene.children.length; i++ ) {
-				scene.children[ i ].render( _context );
-			}
-			
-		} else {
-			
+		if ( ! ( scene instanceof SILK.Scene )) {
 			console.error( "SILK.Canvas.render: scene is not an instance of SILK.Scene", scene );
+			return;
 		}
+		
+		if ( ! ( camera instanceof SILK.Camera )) {
+			console.error( "SILK.Canvas.render: camera is not an instance of SILK.Camera", camera );
+			return;
+		}
+		
+		if ( this.autoClear == true ) this.clear();
+		
+		// load camera context
+		_context.save();
+		// _context.scale( camera.zoom, camera.zoom );
+		_context.translate( camera.position.x, camera.position.y );
+		_context.rotate( camera.rotation );
+		
+		// render scene objects
+		for ( var i = 0; i < scene.children.length; i++ ) {
+			scene.children[ i ].render( _context );
+		}
+		
+		// restore camera context
+		_context.restore();
 	};
 }
 SILK.Object2D = function ( options ) {
@@ -52,18 +75,18 @@ SILK.Object2D = function ( options ) {
 	
 	options = options || {};
 	
-	this.type = 'Object2D';
-	this.parent = null;
+	this.type 		= 'Object2D';
+	this.parent 	= null;
 	
-	this.position = new SILK.Vector2();
-	this.rotation = 0;
-	this.scale = 1;
+	this.position 	= options.position !== undefined ? options.position : new SILK.Vector2();
+	this.rotation 	= options.rotation !== undefined ? options.rotation : 0;
+	this.scale 		= options.scale !== undefined ? options.scale : 1;
 	
-	this.visible = true;
-	this.wireframe = options.wireframe !== undefined ? options.wireframe : false;
+	this.visible 	= options.visible !== undefined ? options.visible : true;
+	this.wireframe 	= options.wireframe !== undefined ? options.wireframe : false;
 	
-	var _color = options.color !== undefined ? options.color : 0x000000;
-	this.color = new SILK.Color( _color );
+	var _color 		= options.color !== undefined ? options.color : 0x000000;
+	this.color 		= new SILK.Color( _color );
 };
 
 SILK.Object2D.prototype = {
@@ -77,12 +100,51 @@ SILK.Object2D.prototype = {
 		if ( this.rotation > Math.PI * 2 ) this.rotation = 0;
 		
 		context.save();
+		context.scale( this.scale, this.scale );
 		context.translate( this.position.x, this.position.y );
 		context.rotate( this.rotation );
 	}
 }
 
 SILK.Object2DIdCount = 0;
+SILK.Scene = function () {
+	
+	this.children = [];
+	
+	// add child
+	
+	this.add = function ( object ) {
+		
+		if ( object instanceof SILK.Object2D ) {
+			
+			if ( object.parent !== null ) {
+				object.parent.remove( object );
+			}
+			
+			object.parent = this;
+			this.children.push( object );
+			
+		} else {
+			
+			console.error( "SILK.Canvas.add: object is not an instance of SILK.Object2D", object );
+		}
+		
+		return this;
+	};
+	
+	// remove child
+	
+	this.remove = function ( object ) {
+		
+		var index = this.children.indexOf( object );
+		
+		if ( index !== - 1 ) {
+			object.parent = null;
+			this.children.splice( index, 1 );
+		}
+	};
+};
+
 SILK.Color = function ( color ) {
 	return this.setHex( color );
 };
@@ -301,44 +363,6 @@ SILK.Rect.prototype.render = function ( context ) {
 	
 	context.restore();
 };
-SILK.Scene = function () {
-	
-	this.children = [];
-	
-	// add child
-	
-	this.add = function ( object ) {
-		
-		if ( object instanceof SILK.Object2D ) {
-			
-			if ( object.parent !== null ) {
-				object.parent.remove( object );
-			}
-			
-			object.parent = this;
-			this.children.push( object );
-			
-		} else {
-			
-			console.error( "SILK.Canvas.add: object is not an instance of SILK.Object2D", object );
-		}
-		
-		return this;
-	};
-	
-	// remove child
-	
-	this.remove = function ( object ) {
-		
-		var index = this.children.indexOf( object );
-		
-		if ( index !== - 1 ) {
-			object.parent = null;
-			this.children.splice( index, 1 );
-		}
-	};
-};
-
 SILK.Triangle = function ( options ) {
 	
 	SILK.Object2D.call( this, options );
