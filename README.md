@@ -10,12 +10,14 @@ silk.js
 <script>
 	
 	var canvas, scene, camera;
-	var square;
+	var shape, material, mesh;
 	
 	init();
 	animate();
 	
 	function init () {
+		
+		scene = new SILK.Scene();
 		
 		canvas = new SILK.Canvas();
 		canvas.setSize( window.innerWidth, window.innerHeight );
@@ -23,10 +25,11 @@ silk.js
 		camera = new SILK.Camera();
 		camera.position.set( window.innerWidth / 2, window.innerHeight / 2 );
 		
-		scene = new SILK.Scene();
+		material = new SILK.BasicMaterial({ wireframe: true, color: 0xff0000 });
+		shape = new SILK.BoxShape({ width: 80, height: 80 });
 		
-		square = new SILK.Rect({ width: 80, height: 80, wireframe: true, color: 0xff0000 });
-		scene.add( square );
+		mesh = new SILK.Mesh ( shape, material );
+		scene.add( mesh );
 		
 		document.body.appendChild( canvas.domElement );
 	}
@@ -35,7 +38,8 @@ silk.js
 		
 		requestAnimationFrame( animate );
 		
-		square.rotation += 0.02;
+		mesh.rotation += 0.02;
+		
 		canvas.render( scene, camera );
 	}
 	
