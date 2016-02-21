@@ -1,2 +1,2 @@
-var SILK = { VERSION: '1' };
+var SILK = { VERSION: '2' };
 var $$ = $$ || SILK;
