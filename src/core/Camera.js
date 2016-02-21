@@ -6,5 +6,5 @@ SILK.Camera = function ( options ) {
 	
 	this.position 	= options.position !== undefined ? options.position : new SILK.Vector2();
 	this.rotation 	= options.rotation !== undefined ? options.rotation : 0;
-	this.zoom 		= options.zoom !== undefined ? options.zoom : 1;
+	this.zoom 		= options.zoom     !== undefined ? options.zoom : 1;
 };
