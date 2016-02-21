@@ -56,4 +56,10 @@ SILK.Canvas = function () {
 		// restore camera context
 		_context.restore();
 	};
+	
+	// smoothing
+	
+	this.setSmoothing = function ( smoothing ) {
+		_context.imageSmoothingEnabled = smoothing;
+	};
 }
