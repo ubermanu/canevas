@@ -7,7 +7,7 @@ module.exports = function ( grunt ) {
 		
 		concat: {
 			dist: {
-				src: [ 'src/**/*' ],
+				src: [ 'src/**/*.js' ],
 				dest: 'build/silk.js',
 				filter: 'isFile'
 			},
@@ -33,16 +33,17 @@ module.exports = function ( grunt ) {
 			},
 			testTarget: {
 				files: {
-					'tests/test-scene.html': 'tests/test-scene.html'
+					'tests/example.html': 'tests/example.html'
 				}
 			}
 		}
 	});
 
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-include-source');
+	grunt.loadNpmTasks( 'grunt-contrib-concat' );
+	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
+	grunt.loadNpmTasks( 'grunt-include-source' );
 
 	// Default task(s).
-	grunt.registerTask('default', ['concat', 'uglify', 'includeSource']);
+	grunt.registerTask( 'default', [ 'includeSource' ]);
+	grunt.registerTask( 'build', [ 'concat', 'uglify' ]);
 };
