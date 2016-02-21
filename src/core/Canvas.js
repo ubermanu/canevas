@@ -44,9 +44,9 @@ SILK.Canvas = function () {
 		
 		// load camera context
 		_context.save();
-		_context.scale( camera.zoom, camera.zoom );
 		_context.translate( camera.position.x, camera.position.y );
 		_context.rotate( camera.rotation );
+		_context.scale( camera.zoom, camera.zoom );
 		
 		// render scene objects
 		for ( var i = 0; i < scene.children.length; i++ ) {
