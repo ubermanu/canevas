@@ -5,7 +5,6 @@ SILK.BasicMaterial = function ( options ) {
 	options = options || {};
 	
 	this.type 		= 'BasicMaterial';
-	
 	this.wireframe 	= options.wireframe !== undefined ? options.wireframe : false;
 	
 	var _color 		= options.color !== undefined ? options.color : 0x000000;
@@ -16,6 +15,8 @@ SILK.BasicMaterial.prototype = Object.create( SILK.Material.prototype );
 SILK.BasicMaterial.prototype.constructor = SILK.BasicMaterial;
 
 SILK.BasicMaterial.prototype.render = function ( context ) {
+	
+	SILK.Material.prototype.render.call( this, context );
 	
 	if ( this.wireframe ) {
 		

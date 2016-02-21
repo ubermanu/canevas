@@ -1,7 +1,9 @@
 SILK.Material = function ( options ) {
 	
 	options = options || {};
-	this.type = 'Material';
+	
+	this.type 	= 'Material';
+	this.alpha 	= options.alpha !== undefined ? options.alpha : 1.0;
 };
 
 SILK.Material.prototype = {
@@ -10,5 +12,6 @@ SILK.Material.prototype = {
 	
 	render: function ( context ) {
 		
+		context.globalAlpha = this.alpha;
 	}
 };
