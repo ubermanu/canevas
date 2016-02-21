@@ -1,14 +1,16 @@
-/*! silk.js 2016-02-20 */
-var SILK = { VERSION: '0' };
+/*! silk.js 2016-02-21 */
+var SILK = { VERSION: '1' };
+var $$ = $$ || SILK;
+
 SILK.Camera = function ( options ) {
 	
 	options = options || {};
 	
-	this.type = 'Camera';
+	this.type 		= 'Camera';
 	
-	this.position = options.position !== undefined ? options.position : new SILK.Vector2();
-	this.rotation = options.rotation !== undefined ? options.rotation : 0;
-	this.zoom     = options.zoom !== undefined ? options.zoom : 1;
+	this.position 	= options.position !== undefined ? options.position : new SILK.Vector2();
+	this.rotation 	= options.rotation !== undefined ? options.rotation : 0;
+	this.zoom 		= options.zoom     !== undefined ? options.zoom : 1;
 };
 SILK.Canvas = function () {
 	
@@ -56,7 +58,7 @@ SILK.Canvas = function () {
 		
 		// load camera context
 		_context.save();
-		// _context.scale( camera.zoom, camera.zoom );
+		_context.scale( camera.zoom, camera.zoom );
 		_context.translate( camera.position.x, camera.position.y );
 		_context.rotate( camera.rotation );
 		
@@ -69,6 +71,21 @@ SILK.Canvas = function () {
 		_context.restore();
 	};
 }
+SILK.Material = function ( options ) {
+	
+	options = options || {};
+	this.type = 'Material';
+};
+
+SILK.Material.prototype = {
+	
+	constructor: SILK.Material,
+	
+	render: function ( context ) {
+		
+	}
+};
+
 SILK.Object2D = function ( options ) {
 	
 	Object.defineProperty( this, 'id', { value: SILK.Object2DIdCount ++ });
@@ -77,47 +94,25 @@ SILK.Object2D = function ( options ) {
 	
 	this.type 		= 'Object2D';
 	this.parent 	= null;
+	this.children 	= [];
 	
 	this.position 	= options.position !== undefined ? options.position : new SILK.Vector2();
 	this.rotation 	= options.rotation !== undefined ? options.rotation : 0;
-	this.scale 		= options.scale !== undefined ? options.scale : 1;
+	this.scale 		= options.scale    !== undefined ? options.scale : 1;
 	
-	this.visible 	= options.visible !== undefined ? options.visible : true;
-	this.wireframe 	= options.wireframe !== undefined ? options.wireframe : false;
-	
-	var _color 		= options.color !== undefined ? options.color : 0x000000;
-	this.color 		= new SILK.Color( _color );
+	this.visible 	= options.visible  !== undefined ? options.visible : true;
 };
 
 SILK.Object2D.prototype = {
 	
 	constructor: SILK.Object2D,
 	
-	render: function ( context ) {
-		
-		if ( ! this.visible ) return;
-		
-		if ( this.rotation > Math.PI * 2 ) this.rotation = 0;
-		
-		context.save();
-		context.scale( this.scale, this.scale );
-		context.translate( this.position.x, this.position.y );
-		context.rotate( this.rotation );
-	}
-}
-
-SILK.Object2DIdCount = 0;
-SILK.Scene = function () {
-	
-	this.children = [];
-	
-	// add child
-	
-	this.add = function ( object ) {
+	add: function ( object ) {
 		
 		if ( object instanceof SILK.Object2D ) {
 			
 			if ( object.parent !== null ) {
+				
 				object.parent.remove( object );
 			}
 			
@@ -126,24 +121,72 @@ SILK.Scene = function () {
 			
 		} else {
 			
-			console.error( "SILK.Canvas.add: object is not an instance of SILK.Object2D", object );
+			console.error( "SILK.Object2D.add: object is not an instance of SILK.Object2D", object );
 		}
 		
 		return this;
-	};
+	},
 	
-	// remove child
-	
-	this.remove = function ( object ) {
+	remove: function ( object ) {
 		
 		var index = this.children.indexOf( object );
 		
 		if ( index !== - 1 ) {
+			
 			object.parent = null;
 			this.children.splice( index, 1 );
 		}
-	};
+	}
+}
+
+SILK.Object2DIdCount = 0;
+
+SILK.Shape = function ( options ) {
+	
+	options = options || {};
+	this.type = 'Shape';
 };
+
+SILK.Shape.prototype = {
+	
+	constructor: SILK.Shape,
+	
+	render: function ( context ) {
+		
+	}
+};
+
+SILK.BasicMaterial = function ( options ) {
+	
+	SILK.Material.call( this, options );
+	
+	options = options || {};
+	
+	this.type 		= 'BasicMaterial';
+	
+	this.wireframe 	= options.wireframe !== undefined ? options.wireframe : false;
+	
+	var _color 		= options.color !== undefined ? options.color : 0x000000;
+	this.color 		= new SILK.Color( _color );
+};
+
+SILK.BasicMaterial.prototype = Object.create( SILK.Material.prototype );
+SILK.BasicMaterial.prototype.constructor = SILK.BasicMaterial;
+
+SILK.BasicMaterial.prototype.render = function ( context ) {
+	
+	if ( this.wireframe ) {
+		
+		context.strokeStyle = this.color.getStyle();
+		context.stroke();
+		
+	} else {
+		
+		context.fillStyle = this.color.getStyle();
+		context.fill();
+	}
+};
+
 
 SILK.Color = function ( color ) {
 	return this.setHex( color );
@@ -294,127 +337,134 @@ SILK.Vector2.prototype = {
 		return dx * dx + dy * dy;
 	}
 };
-SILK.Circle = function ( options ) {
+SILK.Mesh = function ( shape, material ) {
 	
-	SILK.Object2D.call( this, options );
+	SILK.Object2D.call( this );
 	
-	options = options || {};
+	this.type = 'Mesh';
 	
-	this.radius = options.radius !== undefined ? options.radius : 0;
+	this.shape = shape !== undefined ? shape : new SILK.Shape();
+	this.material = material !== undefined ? material : new SILK.BasicMaterial({ color: Math.random() * 0xffffff });
 };
 
-SILK.Circle.prototype = Object.create( SILK.Object2D.prototype );
+SILK.Mesh.prototype = Object.create( SILK.Object2D.prototype );
+SILK.Mesh.prototype.constructor = SILK.Mesh;
 
-SILK.Circle.prototype.constructor = SILK.Circle;
-
-SILK.Circle.prototype.render = function ( context ) {
+SILK.Mesh.prototype.render = function ( context ) {
 	
-	SILK.Object2D.prototype.render.call( this, context );
+	this.rotation %= Math.PI * 2;
 	
-	context.beginPath();
-	context.arc( 0, 0, this.radius, 0, 2 * Math.PI );
-	
-	if ( this.wireframe ) {
+	if ( this.visible ) {
 		
-		context.strokeStyle = this.color.getStyle();
-		context.stroke();
+		context.save();
 		
-	} else {
+		context.scale( this.scale, this.scale );
+		context.translate( this.position.x, this.position.y );
+		context.rotate( this.rotation );
 		
-		context.fillStyle = this.color.getStyle();
-		context.fill();
+		this.shape.render( context );
+		this.material.render( context );
+		
+		context.restore();
 	}
-	
-	context.restore();
 };
-SILK.Rect = function ( options ) {
+
+SILK.Scene = function () {
 	
-	SILK.Object2D.call( this, options );
+	SILK.Object2D.call( this );
+	
+	this.type = 'Scene';
+};
+
+SILK.Scene.prototype = Object.create( SILK.Object2D.prototype );
+SILK.Scene.prototype.constructor = SILK.Scene;
+
+SILK.BoxShape = function ( options ) {
 	
 	options = options || {};
 	
-	this.width = options.width !== undefined ? options.width : 0;
+	this.type   = 'BoxShape';
+	this.width  = options.width  !== undefined ? options.width : 0;
 	this.height = options.height !== undefined ? options.height : 0;
 };
 
-SILK.Rect.prototype = Object.create( SILK.Object2D.prototype );
-
-SILK.Rect.prototype.constructor = SILK.Rect;
-
-SILK.Rect.prototype.render = function ( context ) {
+SILK.BoxShape.prototype = {
 	
-	SILK.Object2D.prototype.render.call( this, context );
+	constructor: SILK.BoxShape,
 	
-	var _x = - this.width / 2,
-		_y = - this.height / 2,
-		_w = this.width,
-		_h = this.height;
+	render: function ( context ) {
+		
+		var _w2 = this.width / 2,
+			_h2 = this.height / 2;
+		
+		context.beginPath();
 	
-	if ( this.wireframe ) {
+		context.moveTo( - _w2, - _h2 );
+		context.lineTo( - _w2, _h2 );
+		context.lineTo( _w2, _h2 );
+		context.lineTo( _w2, - _h2 );
 		
-		context.strokeStyle = this.color.getStyle();
-		context.strokeRect( _x, _y, _w, _h );
-		
-	} else {
-		
-		context.fillStyle = this.color.getStyle();
-		context.fillRect( _x, _y, _w, _h );
+		context.closePath();
 	}
-	
-	context.restore();
 };
-SILK.Triangle = function ( options ) {
-	
-	SILK.Object2D.call( this, options );
+
+SILK.CircleShape = function ( options ) {
 	
 	options = options || {};
 	
+	this.type   = 'CircleShape';
 	this.radius = options.radius !== undefined ? options.radius : 0;
 };
 
-SILK.Triangle.prototype = Object.create( SILK.Object2D.prototype );
-
-SILK.Triangle.prototype.constructor = SILK.Triangle;
-
-SILK.Triangle.prototype.render = function ( context ) {
+SILK.CircleShape.prototype = {
 	
-	SILK.Object2D.prototype.render.call( this, context );
+	constructor: SILK.CircleShape,
 	
-	var toRadian = Math.PI / 180;
-	
-	var _a = new SILK.Vector2(
-		Math.cos( 30 * toRadian ),
-		Math.sin( 30 * toRadian ))
-		.multScalar( this.radius );
-	
-	var _b = new SILK.Vector2(
-		Math.cos( 150 * toRadian ),
-		Math.sin( 150 * toRadian ))
-		.multScalar( this.radius );
-	
-	var _c = new SILK.Vector2(
-		Math.cos( 270 * toRadian ),
-		Math.sin( 270 * toRadian ))
-		.multScalar( this.radius );
-	
-	context.beginPath();
-	
-	context.moveTo( _a.x, _a.y );
-	context.lineTo( _b.x, _b.y );
-	context.lineTo( _c.x, _c.y );
-	
-	context.closePath();
-	
-	if ( this.wireframe ) {
+	render: function ( context ) {
 		
-		context.strokeStyle = this.color.getStyle();
-		context.stroke();
-		
-	} else {
-		
-		context.fillStyle = this.color.getStyle();
-		context.fill();
+		context.beginPath();
+		context.arc( 0, 0, this.radius, 0, 2 * Math.PI );
+		context.closePath();
 	}
+};
+
+SILK.TriangleShape = function ( options ) {
 	
-	context.restore();
+	options = options || {};
+	
+	this.type   = 'TriangleShape';
+	this.radius = options.radius !== undefined ? options.radius : 0;
+};
+
+SILK.TriangleShape.prototype = {
+	
+	constructor: SILK.TriangleShape,
+	
+	render: function ( context ) {
+		
+		var toRadian = Math.PI / 180;
+		
+		var _a = new SILK.Vector2(
+			Math.cos( 30 * toRadian ),
+			Math.sin( 30 * toRadian ))
+			.multScalar( this.radius );
+		
+		var _b = new SILK.Vector2(
+			Math.cos( 150 * toRadian ),
+			Math.sin( 150 * toRadian ))
+			.multScalar( this.radius );
+		
+		var _c = new SILK.Vector2(
+			Math.cos( 270 * toRadian ),
+			Math.sin( 270 * toRadian ))
+			.multScalar( this.radius );
+		
+		context.beginPath();
+		
+		context.moveTo( _a.x, _a.y );
+		context.lineTo( _b.x, _b.y );
+		context.lineTo( _c.x, _c.y );
+		
+		context.closePath();
+	}
 };
