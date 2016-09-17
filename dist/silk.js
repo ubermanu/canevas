@@ -410,6 +410,7 @@ SILK.Object2DIdCount = 0;
  *
  * Should be rendered at position [0,0]
  * Then the context handles the position/rotation/scale
+ * Contains an array of points position (not used by CircleShape though)
  */
 SILK.Shape = function (options) {
 
@@ -417,15 +418,44 @@ SILK.Shape = function (options) {
 
     /** @type {string} */
     this.type = 'Shape';
+
+    /** @type {Array.<Vector2>} */
+    this.points = [];
+
+    /** @type {boolean} */
+    this.autoUpdate = false;
 };
 
 /** @constructor */
 SILK.Shape.prototype.constructor = SILK.Shape;
 
 /**
+ * Update points
+ */
+SILK.Shape.prototype.update = Function.prototype;
+
+/**
  * Render
  */
-SILK.Shape.prototype.constructor.render = null;
+SILK.Shape.prototype.render = function (context) {
+
+    // Update if needed
+    if (this.autoUpdate) this.update();
+
+    context.beginPath();
+
+    // Draw the path through the points
+    for (var i = 0, l = this.points.length; i < l; i++) {
+        var point = this.points[i];
+        if (i === 0) {
+            context.moveTo(point[0], point[1]);
+        } else {
+            context.lineTo(point[0], point[1]);
+        }
+    }
+
+    context.closePath();
+};
 
 /**
  * BasicMaterial
@@ -613,27 +643,26 @@ SILK.BoxShape = function (options) {
 
     /** @type {number} */
     this.height = options.height !== undefined ? options.height : 0;
+
+    // Build the points array from properties
+    this.update();
 };
+
+/** @extends Shape */
+SILK.BoxShape.prototype = new SILK.Shape;
 
 /** @constructor */
 SILK.BoxShape.prototype.constructor = SILK.BoxShape;
 
 /**
- * Render
+ * Update
  */
-SILK.BoxShape.prototype.render = function (context) {
+SILK.BoxShape.prototype.update = function () {
 
-    var _w2 = this.width / 2,
-        _h2 = this.height / 2;
+    var w = this.width / 2,
+        h = this.height / 2;
 
-    context.beginPath();
-
-    context.moveTo(- _w2, - _h2);
-    context.lineTo(- _w2, _h2);
-    context.lineTo(_w2, _h2);
-    context.lineTo(_w2, - _h2);
-
-    context.closePath();
+    this.points = [[-w, -h], [-w, h], [w, h], [w, -h]];
 };
 
 /**
@@ -650,18 +679,23 @@ SILK.CircleShape = function (options) {
     this.radius = options.radius !== undefined ? options.radius : 0;
 };
 
+/** @extends Shape */
+SILK.CircleShape.prototype = new SILK.Shape;
+
 /** @constructor */
 SILK.CircleShape.prototype.constructor = SILK.CircleShape;
 
 /**
  * Render
+ *
+ * Since the CircleShape does not use points
+ * Use a custom render function
  */
 SILK.CircleShape.prototype.render = function (context) {
     context.beginPath();
     context.arc(0, 0, this.radius, 0, 2 * Math.PI);
     context.closePath();
 };
-
 
 /**
  * TriangleShape
@@ -675,40 +709,40 @@ SILK.TriangleShape = function (options) {
 
     /** @type {number} */
     this.radius = options.radius !== undefined ? options.radius : 0;
+
+    // Build the points array from properties
+    this.update();
 };
+
+/** @extends Shape */
+SILK.TriangleShape.prototype = new SILK.Shape;
 
 /** @constructor */
 SILK.TriangleShape.prototype.constructor = SILK.TriangleShape;
 
 /**
- * Render
+ * Update
  */
-SILK.TriangleShape.prototype.render = function (context) {
+SILK.TriangleShape.prototype.update = function () {
 
     var toRadian = Math.PI / 180;
 
-    var _a = new SILK.Vector2(
+    var a = new SILK.Vector2(
         Math.cos(30 * toRadian),
         Math.sin(30 * toRadian))
         .multScalar(this.radius);
 
-    var _b = new SILK.Vector2(
+    var b = new SILK.Vector2(
         Math.cos(150 * toRadian),
         Math.sin(150 * toRadian))
         .multScalar(this.radius);
 
-    var _c = new SILK.Vector2(
+    var c = new SILK.Vector2(
         Math.cos(270 * toRadian),
         Math.sin(270 * toRadian))
         .multScalar(this.radius);
 
-    context.beginPath();
-
-    context.moveTo(_a.x, _a.y);
-    context.lineTo(_b.x, _b.y);
-    context.lineTo(_c.x, _c.y);
-
-    context.closePath();
+    this.points = [[a.x, a.y], [b.x, b.y], [c.x, c.y]];
 };
 
 /**

@@ -12,11 +12,17 @@ SILK.CircleShape = function (options) {
     this.radius = options.radius !== undefined ? options.radius : 0;
 };
 
+/** @extends Shape */
+SILK.CircleShape.prototype = new SILK.Shape;
+
 /** @constructor */
 SILK.CircleShape.prototype.constructor = SILK.CircleShape;
 
 /**
  * Render
+ *
+ * Since the CircleShape does not use points
+ * Use a custom render function
  */
 SILK.CircleShape.prototype.render = function (context) {
     context.beginPath();

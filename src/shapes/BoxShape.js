@@ -13,25 +13,24 @@ SILK.BoxShape = function (options) {
 
     /** @type {number} */
     this.height = options.height !== undefined ? options.height : 0;
+
+    // Build the points array from properties
+    this.update();
 };
+
+/** @extends Shape */
+SILK.BoxShape.prototype = new SILK.Shape;
 
 /** @constructor */
 SILK.BoxShape.prototype.constructor = SILK.BoxShape;
 
 /**
- * Render
+ * Update
  */
-SILK.BoxShape.prototype.render = function (context) {
+SILK.BoxShape.prototype.update = function () {
 
-    var _w2 = this.width / 2,
-        _h2 = this.height / 2;
+    var w = this.width / 2,
+        h = this.height / 2;
 
-    context.beginPath();
-
-    context.moveTo(- _w2, - _h2);
-    context.lineTo(- _w2, _h2);
-    context.lineTo(_w2, _h2);
-    context.lineTo(_w2, - _h2);
-
-    context.closePath();
+    this.points = [[-w, -h], [-w, h], [w, h], [w, -h]];
 };
