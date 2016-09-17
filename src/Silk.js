@@ -1,6 +1,3 @@
-/**
- * SILK namespace
- */
 var SILK = {
 
     /** @const {string} */
