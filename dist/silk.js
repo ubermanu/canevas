@@ -551,7 +551,6 @@ SILK.ImageMaterial.prototype.render = function (context) {
     context.drawImage(this.image, - this.image.width / 2, - this.image.height / 2);
 };
 
-
 /**
  * SpriteMaterial
  *
@@ -698,52 +697,73 @@ SILK.CircleShape.prototype.render = function (context) {
 };
 
 /**
- * TriangleShape
+ * PolygonShape
  */
-SILK.TriangleShape = function (options) {
+SILK.PolygonShape = function (options) {
 
     options = options || {};
 
     /** @type {string} */
-    this.type = 'TriangleShape';
+    this.type = 'PolygonShape';
 
     /** @type {number} */
-    this.radius = options.radius !== undefined ? options.radius : 0;
+    this.faces = options.faces !== undefined ? options.faces : 3;
+
+    /** @type {number} */
+    this.radius = options.radius !== undefined ? options.radius : 1;
 
     // Build the points array from properties
     this.update();
 };
 
 /** @extends Shape */
-SILK.TriangleShape.prototype = new SILK.Shape;
+SILK.PolygonShape.prototype = new SILK.Shape;
 
 /** @constructor */
-SILK.TriangleShape.prototype.constructor = SILK.TriangleShape;
+SILK.PolygonShape.prototype.constructor = SILK.PolygonShape;
 
 /**
  * Update
  */
-SILK.TriangleShape.prototype.update = function () {
+SILK.PolygonShape.prototype.update = function () {
 
-    var toRadian = Math.PI / 180;
+    // Angle for each faces
+    var anglePart = SILK.PI2 / this.faces;
 
-    var a = new SILK.Vector2(
-        Math.cos(30 * toRadian),
-        Math.sin(30 * toRadian))
-        .multScalar(this.radius);
+    // Reset points
+    this.points = [];
 
-    var b = new SILK.Vector2(
-        Math.cos(150 * toRadian),
-        Math.sin(150 * toRadian))
-        .multScalar(this.radius);
+    // For each face, add a point
+    for (var i = 0, l = this.faces; i < l; i++) {
 
-    var c = new SILK.Vector2(
-        Math.cos(270 * toRadian),
-        Math.sin(270 * toRadian))
-        .multScalar(this.radius);
+        var corner = new SILK.Vector2(
+                Math.cos(i * anglePart),
+                Math.sin(i * anglePart))
+            .multScalar(this.radius);
 
-    this.points = [[a.x, a.y], [b.x, b.y], [c.x, c.y]];
+        this.points.push([corner.x, corner.y]);
+    }
 };
+
+/**
+ * TriangleShape
+ */
+SILK.TriangleShape = function (options) {
+
+    options = options || {};
+    options.faces = 3;
+
+    SILK.PolygonShape.call(this, options);
+
+    /** @type {string} */
+    this.type = 'TriangleShape';
+};
+
+/** @extends Shape */
+SILK.TriangleShape.prototype = new SILK.PolygonShape;
+
+/** @constructor */
+SILK.TriangleShape.prototype.constructor = SILK.TriangleShape;
 
 /**
  * Mesh
