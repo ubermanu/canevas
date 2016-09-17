@@ -38,7 +38,7 @@ gulp.task('compress', function() {
 
 gulp.task('dev', function () {
     return watch('src/**/*.js', function () {
-        gulp.start('build');
+        gulp.start('build', 'compress');
     });
 });
 
