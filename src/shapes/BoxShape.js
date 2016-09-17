@@ -15,9 +15,6 @@ SILK.BoxShape = function (options) {
     this.height = options.height !== undefined ? options.height : 0;
 };
 
-/** @extends Shape */
-SILK.BoxShape.prototype = SILK.Shape;
-
 /** @constructor */
 SILK.BoxShape.prototype.constructor = SILK.BoxShape;
 

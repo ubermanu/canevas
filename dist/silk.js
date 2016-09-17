@@ -215,13 +215,12 @@ SILK.Canvas = function () {
     console.log('SILK.Canvas', SILK.VERSION);
 
     var _canvas = document.createElement('canvas');
+
+    /** @type {CanvasRenderingContext2D} */
     var _context = _canvas.getContext('2d');
 
     /** @type {Element} */
     this.domElement = _canvas;
-
-    /** @type {CanvasRenderingContext2D} */
-    this.context = null;
 
     /** @type {boolean} */
     this.autoClear = true;
@@ -616,9 +615,6 @@ SILK.BoxShape = function (options) {
     this.height = options.height !== undefined ? options.height : 0;
 };
 
-/** @extends Shape */
-SILK.BoxShape.prototype = SILK.Shape;
-
 /** @constructor */
 SILK.BoxShape.prototype.constructor = SILK.BoxShape;
 
@@ -654,9 +650,6 @@ SILK.CircleShape = function (options) {
     this.radius = options.radius !== undefined ? options.radius : 0;
 };
 
-/** @extends Shape */
-SILK.CircleShape.prototype = SILK.Shape;
-
 /** @constructor */
 SILK.CircleShape.prototype.constructor = SILK.CircleShape;
 
@@ -683,9 +676,6 @@ SILK.TriangleShape = function (options) {
     /** @type {number} */
     this.radius = options.radius !== undefined ? options.radius : 0;
 };
-
-/** @extends Shape */
-SILK.TriangleShape.prototype = SILK.Shape;
 
 /** @constructor */
 SILK.TriangleShape.prototype.constructor = SILK.TriangleShape;

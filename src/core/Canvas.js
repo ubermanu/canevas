@@ -9,13 +9,12 @@ SILK.Canvas = function () {
     console.log('SILK.Canvas', SILK.VERSION);
 
     var _canvas = document.createElement('canvas');
+
+    /** @type {CanvasRenderingContext2D} */
     var _context = _canvas.getContext('2d');
 
     /** @type {Element} */
     this.domElement = _canvas;
-
-    /** @type {CanvasRenderingContext2D} */
-    this.context = null;
 
     /** @type {boolean} */
     this.autoClear = true;

@@ -12,9 +12,6 @@ SILK.TriangleShape = function (options) {
     this.radius = options.radius !== undefined ? options.radius : 0;
 };
 
-/** @extends Shape */
-SILK.TriangleShape.prototype = SILK.Shape;
-
 /** @constructor */
 SILK.TriangleShape.prototype.constructor = SILK.TriangleShape;
 

@@ -12,9 +12,6 @@ SILK.CircleShape = function (options) {
     this.radius = options.radius !== undefined ? options.radius : 0;
 };
 
-/** @extends Shape */
-SILK.CircleShape.prototype = SILK.Shape;
-
 /** @constructor */
 SILK.CircleShape.prototype.constructor = SILK.CircleShape;
 
