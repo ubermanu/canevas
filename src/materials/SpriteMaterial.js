@@ -38,7 +38,7 @@ SILK.SpriteMaterial = function (options) {
 };
 
 /** @extends ImageMaterial */
-SILK.SpriteMaterial.prototype = Object.create(SILK.ImageMaterial.prototype);
+SILK.SpriteMaterial.prototype = new SILK.ImageMaterial;
 
 /** @constructor */
 SILK.SpriteMaterial.prototype.constructor = SILK.SpriteMaterial;

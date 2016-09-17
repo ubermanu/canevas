@@ -24,7 +24,7 @@ SILK.BasicMaterial = function (options) {
 };
 
 /** @extends Material */
-SILK.BasicMaterial.prototype = Object.create(SILK.Material.prototype);
+SILK.BasicMaterial.prototype = new SILK.Material;
 
 /** @constructor */
 SILK.BasicMaterial.prototype.constructor = SILK.BasicMaterial;

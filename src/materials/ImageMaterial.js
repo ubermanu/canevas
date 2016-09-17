@@ -23,7 +23,7 @@ SILK.ImageMaterial = function (options) {
 };
 
 /** @extends Material */
-SILK.ImageMaterial.prototype = Object.create(SILK.Material.prototype);
+SILK.ImageMaterial.prototype = new SILK.Material;
 
 /** @constructor */
 SILK.ImageMaterial.prototype.constructor = SILK.ImageMaterial;

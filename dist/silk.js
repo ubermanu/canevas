@@ -483,7 +483,7 @@ SILK.BasicMaterial = function (options) {
 };
 
 /** @extends Material */
-SILK.BasicMaterial.prototype = Object.create(SILK.Material.prototype);
+SILK.BasicMaterial.prototype = new SILK.Material;
 
 /** @constructor */
 SILK.BasicMaterial.prototype.constructor = SILK.BasicMaterial;
@@ -530,7 +530,7 @@ SILK.ImageMaterial = function (options) {
 };
 
 /** @extends Material */
-SILK.ImageMaterial.prototype = Object.create(SILK.Material.prototype);
+SILK.ImageMaterial.prototype = new SILK.Material;
 
 /** @constructor */
 SILK.ImageMaterial.prototype.constructor = SILK.ImageMaterial;
@@ -592,7 +592,7 @@ SILK.SpriteMaterial = function (options) {
 };
 
 /** @extends ImageMaterial */
-SILK.SpriteMaterial.prototype = Object.create(SILK.ImageMaterial.prototype);
+SILK.SpriteMaterial.prototype = new SILK.ImageMaterial;
 
 /** @constructor */
 SILK.SpriteMaterial.prototype.constructor = SILK.SpriteMaterial;
