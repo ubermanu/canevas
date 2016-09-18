@@ -65,11 +65,8 @@ SILK.Canvas = function () {
         _context.rotate(camera.rotation);
         _context.scale(camera.zoom, camera.zoom);
 
-        // Render scene objects using their own context
-        // This will apply their position/rotation/scale
-        for (var i = 0, l = scene.children.length; i < l; i++) {
-            scene.children[i].render(_context);
-        }
+        // Render scene
+        scene.render(_context);
 
         // Restore camera context
         _context.restore();
