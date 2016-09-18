@@ -28,7 +28,7 @@ gulp.task('build', function() {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('compress', function() {
+gulp.task('compress', ['build'], function() {
     return gulp.src('./dist/silk.js')
         .pipe(uglify())
         .pipe(rename({ suffix: '.min' }))
@@ -36,10 +36,8 @@ gulp.task('compress', function() {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('dev', function () {
+gulp.task('default', function () {
     return watch('src/**/*.js', function () {
-        gulp.start('build', 'compress');
+        gulp.start('compress');
     });
 });
-
-gulp.task('default', ['build', 'compress']);
