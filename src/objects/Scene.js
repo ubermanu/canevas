@@ -10,7 +10,7 @@ SILK.Scene = function () {
 };
 
 /** @extends Object2D */
-SILK.Scene.prototype = Object.create(SILK.Object2D.prototype);
+SILK.Scene.prototype = new SILK.Object2D;
 
 /** @constructor */
 SILK.Scene.prototype.constructor = SILK.Scene;

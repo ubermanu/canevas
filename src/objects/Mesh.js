@@ -21,7 +21,7 @@ SILK.Mesh = function (shape, material) {
 };
 
 /** @extends Object2D */
-SILK.Mesh.prototype = Object.create(SILK.Object2D.prototype);
+SILK.Mesh.prototype = new SILK.Object2D;
 
 /** @constructor */
 SILK.Mesh.prototype.constructor = SILK.Mesh;
@@ -32,7 +32,7 @@ SILK.Mesh.prototype.constructor = SILK.Mesh;
 SILK.Mesh.prototype.render = function (context) {
 
     // Limit rotation value to a whole 360
-    this.rotation %= Math.PI * 2;
+    this.rotation %= SILK.PI2;
 
     if (this.visible) {
 
