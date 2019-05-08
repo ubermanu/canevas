@@ -6,21 +6,22 @@
  */
 class Material {
 
-  /** @type {string} */
   type = 'Material';
-
-  /** @type {number} */
   opacity = 1.0;
 
-  constructor(options) {
+  constructor(options: MaterialOptions = {}) {
     if (options.opacity !== undefined) {
       this.opacity = options.opacity;
     }
   }
 
-  render(context) {
+  render(context: CanvasRenderingContext2D) {
     context.globalAlpha = this.opacity;
   }
 }
 
-export { Material };
+interface MaterialOptions {
+  opacity?: number;
+}
+
+export { Material, MaterialOptions };

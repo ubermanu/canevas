@@ -26,7 +26,7 @@ class Object2D {
    *
    * @param options
    */
-  constructor(options: ConstructorOptions = {}) {
+  constructor(options: Object2DOptions = {}) {
 
     if (options.position !== undefined) {
       this.position = options.position;
@@ -85,7 +85,7 @@ class Object2D {
 /**
  * Object2D constructor options.
  */
-interface ConstructorOptions {
+interface Object2DOptions {
   position?: Vector2;
   rotation?: number;
   scale?: number;
@@ -98,4 +98,4 @@ interface ConstructorOptions {
  */
 let Object2DIdCount: number = 0;
 
-export { Object2D };
+export { Object2D, Object2DOptions };

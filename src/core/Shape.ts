@@ -1,3 +1,5 @@
+import { Vector2 } from "../math/Vector2";
+
 /**
  * Shape
  *
@@ -7,18 +9,21 @@
  */
 abstract class Shape {
 
-  /** @type {string} */
   type = 'Shape';
 
-  /** @type {Array.<Vector2>} */
-  points = [];
+  // Contains all the vertices of the shape
+  points: Array<Vector2> = [];
 
-  /** @type {boolean} */
+  // Auto update dimensions if necessary
   autoUpdate = false;
 
-  abstract update();
+  // TODO: Implement this method here
+  abstract update(): void;
 
-  render(context) {
+  /**
+   * Renders the points of the shape.
+   */
+  render(context: CanvasRenderingContext2D) {
 
     // Update if needed
     if (this.autoUpdate) this.update();
@@ -27,11 +32,11 @@ abstract class Shape {
 
     // Draw the path through the points
     for (var i = 0, l = this.points.length; i < l; i++) {
-      var point = this.points[i];
+      let point = this.points[i];
       if (i === 0) {
-        context.moveTo(point[0], point[1]);
+        context.moveTo(point.x, point.y);
       } else {
-        context.lineTo(point[0], point[1]);
+        context.lineTo(point.x, point.y);
       }
     }
 
