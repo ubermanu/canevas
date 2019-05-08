@@ -8,33 +8,14 @@ import { Vector2 } from "../math/Vector2";
  */
 class Camera {
 
-  /**
-   * @type {number}
-   */
-  options: object;
-
-  /**
-   * @type {string}
-   */
   type: string = 'camera';
 
-  /**
-   * @type {Vector2}
-   */
-  position: Vector2;
-
-  /**
-   * @type {number}
-   */
+  position: Vector2 = new Vector2();
   rotation: number = 0;
-
-  /**
-   * @type {number}
-   */
   zoom: number = 1;
 
-  constructor(options: object) {
-    options = options || {};
+  constructor(options?: object) {
+    // TODO: Use options to set properties
   }
 }
 

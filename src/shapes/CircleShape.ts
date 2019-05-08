@@ -5,15 +5,16 @@ import { Shape } from "../core/Shape";
  */
 class CircleShape extends Shape {
 
-  /** @type {string} */
-  type = 'CircleShape';
+  type: string = 'CircleShape';
 
-  /** @type {number} */
-  radius = 0;
+  radius: number = 0;
 
-  constructor(options) {
+  constructor(options: { radius?: number } = {}) {
     super();
-    this.radius = options.radius !== undefined ? options.radius : 0;
+
+    if (options.radius !== undefined) {
+      this.radius = options.radius
+    }
   }
 
   update() {
@@ -26,7 +27,7 @@ class CircleShape extends Shape {
    * Since the CircleShape does not use points
    * Use a custom render function
    */
-  render = function (context) {
+  render(context: CanvasRenderingContext2D) {
     context.beginPath();
     context.arc(0, 0, this.radius, 0, 2 * Math.PI);
     context.closePath();

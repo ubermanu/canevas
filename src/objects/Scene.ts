@@ -5,16 +5,15 @@ import { Object2D } from "../core/Object2D";
  */
 class Scene extends Object2D {
 
-  /** @type {string} */
-  type = 'Scene';
+  type: string = 'Scene';
 
   /**
    * Render the scene meshes recursively
    *
    * @param {CanvasRenderingContext2D} context
-   * @param {Array.<Mesh>} children
+   * @param {Array<Mesh>} children
    */
-  render = function (context, children = []) {
+  render(context: CanvasRenderingContext2D, children = []) {
 
     // Get scene children if not defined
     // This case is mostly the start of the loop

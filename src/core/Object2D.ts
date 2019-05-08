@@ -11,42 +11,38 @@ import { Vector2 } from "../math/Vector2";
  */
 class Object2D {
 
-  id = Object2DIdCount++;
+  id: number = Object2DIdCount++;
+  type: string = 'Object2D';
 
-  /** @type {string} */
-  type = 'Object2D';
+  parent: Object2D | null = null;
+  children: Array<Object2D> = [];
 
-  /** @type {Object2D} */
-  parent = null;
+  position: Vector2 = new Vector2();
+  rotation: number = 0;
+  scale: number = 1;
+  visible: boolean = true;
 
-  /** @type {Array.<Object2D>} */
-  children = [];
+  /**
+   *
+   * @param options
+   */
+  constructor(options: ConstructorOptions = {}) {
 
-  /** @type {Vector2} */
-  position;
+    if (options.position !== undefined) {
+      this.position = options.position;
+    }
 
-  /** @type {number} */
-  rotation;
+    if (options.rotation !== undefined) {
+      this.rotation = options.rotation;
+    }
 
-  /** @type {number} */
-  scale;
+    if (options.scale !== undefined) {
+      this.scale = options.scale;
+    }
 
-  /** @type {boolean} */
-  visible;
-
-  constructor(options) {
-
-    /** @type {Vector2} */
-    this.position = options.position !== undefined ? options.position : new Vector2();
-
-    /** @type {number} */
-    this.rotation = options.rotation !== undefined ? options.rotation : 0;
-
-    /** @type {number} */
-    this.scale = options.scale !== undefined ? options.scale : 1;
-
-    /** @type {boolean} */
-    this.visible = options.visible !== undefined ? options.visible : true;
+    if (options.visible !== undefined) {
+      this.visible = options.visible;
+    }
   }
 
   /**
@@ -55,31 +51,25 @@ class Object2D {
    * @param {Object2D} object
    * @return {this}
    */
-  add(object) {
+  add(object: Object2D) {
 
-    if (object instanceof Object2D) {
-
-      if (object.parent !== null) {
-        object.parent.remove(object);
-      }
-
-      object.parent = this;
-      this.children.push(object);
-
-    } else {
-      console.error('SILK.Object2D.add: object is not an instance of SILK.Object2D', object);
+    if (object.parent !== null) {
+      object.parent.remove(object);
     }
+
+    object.parent = this;
+    this.children.push(object);
 
     return this;
   }
 
   /**
-   * Remove an object to its children if it exists
+   * Remove an object to its children if it exists.
    *
    * @param {Object2D} object
    * @return {this}
    */
-  remove(object) {
+  remove(object: Object2D) {
 
     var index = this.children.indexOf(object);
 
@@ -92,7 +82,20 @@ class Object2D {
   }
 }
 
-/** @const {number} */
-let Object2DIdCount = 0;
+/**
+ * Object2D constructor options.
+ */
+interface ConstructorOptions {
+  position?: Vector2;
+  rotation?: number;
+  scale?: number;
+  visible?: boolean;
+}
+
+/**
+ * Unique ID counter.
+ * TODO: Use uuid?
+ */
+let Object2DIdCount: number = 0;
 
 export { Object2D };
