@@ -2,16 +2,14 @@ import { PolygonShape } from "./PolygonShape";
 
 /**
  * TriangleShape
+ *
+ * This polygon must have 3 faces.
  */
 class TriangleShape extends PolygonShape {
 
-  /** @type {string} */
-  type = 'TriangleShape';
+  type: string = 'TriangleShape';
 
-  constructor(options) {
-    super(options);
-    this.faces = 3;
-  }
+  faces: number = 3;
 }
 
 export { TriangleShape };

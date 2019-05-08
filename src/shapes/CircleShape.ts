@@ -7,14 +7,11 @@ class CircleShape extends Shape {
 
   type: string = 'CircleShape';
 
-  radius: number = 0;
+  radius: number;
 
-  constructor(options: { radius?: number } = {}) {
+  constructor(options: CircleShapeOptions = { radius: 1 }) {
     super();
-
-    if (options.radius !== undefined) {
-      this.radius = options.radius
-    }
+    this.radius = options.radius
   }
 
   update() {
@@ -34,4 +31,9 @@ class CircleShape extends Shape {
   }
 }
 
-export { CircleShape };
+// CircleShape constructor options.
+interface CircleShapeOptions {
+  radius: number;
+}
+
+export { CircleShape, CircleShapeOptions };

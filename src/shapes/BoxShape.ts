@@ -5,23 +5,16 @@ import { Shape } from "../core/Shape";
  */
 class BoxShape extends Shape {
 
-  /** @type {string} */
-  type = 'BoxShape';
+  type: string = 'BoxShape';
 
-  /** @type {number} */
-  width = 0;
+  width: number = 0;
+  height: number = 0;
 
-  /** @type {number} */
-  height = 0;
-
-  constructor(options) {
+  constructor(options: BoxShapeOptions = { width: 0, height: 0 }) {
     super();
 
-    /** @type {number} */
-    this.width = options.width !== undefined ? options.width : 0;
-
-    /** @type {number} */
-    this.height = options.height !== undefined ? options.height : 0;
+    this.width = options.width;
+    this.height = options.height;
 
     // Build the points array from properties
     this.update();
@@ -37,4 +30,10 @@ class BoxShape extends Shape {
   }
 }
 
-export { BoxShape };
+// Constructor options.
+interface BoxShapeOptions {
+  width: number;
+  height: number;
+}
+
+export { BoxShape, BoxShapeOptions };

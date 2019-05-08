@@ -6,27 +6,27 @@ import { Vector2 } from "../math/Vector2";
  */
 class PolygonShape extends Shape {
 
-  /** @type {string} */
-  type = 'PolygonShape';
+  type: string = 'PolygonShape';
 
-  /** @type {number} */
-  faces = 3;
+  faces: number = 3;
+  radius: number = 1;
 
-  /** @type {number} */
-  radius = 1;
-
-  constructor(options) {
+  constructor(options: PolygonShapeOptions) {
     super();
-    this.faces = options.faces !== undefined ? options.faces : 3;
-    this.radius = options.radius !== undefined ? options.radius : 1;
+
+    if (options.faces !== undefined) {
+      this.faces = options.faces;
+    }
+
+    if (options.radius !== undefined) {
+      this.radius = options.radius;
+    }
 
     // Build the points array from properties
     this.update();
   }
 
-  /**
-   * Update
-   */
+  // Update points
   update() {
 
     // Angle for each faces
@@ -48,4 +48,10 @@ class PolygonShape extends Shape {
   }
 }
 
-export { PolygonShape };
+// PolygonShape constructor options
+interface PolygonShapeOptions {
+  faces?: number;
+  radius?: number;
+}
+
+export { PolygonShape, PolygonShapeOptions };

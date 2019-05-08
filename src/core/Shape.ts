@@ -1,5 +1,3 @@
-import { Vector2 } from "../math/Vector2";
-
 /**
  * Shape
  *
@@ -11,10 +9,11 @@ abstract class Shape {
 
   type = 'Shape';
 
-  // Contains all the vertices of the shape
-  points: Array<Vector2> = [];
+  // Contains all the vertices of the shape.
+  // This is a two dimentional array for performances purposes.
+  points: number[][] = [];
 
-  // Auto update dimensions if necessary
+  // Auto update dimensions if necessary.
   autoUpdate = false;
 
   // TODO: Implement this method here
@@ -34,9 +33,9 @@ abstract class Shape {
     for (var i = 0, l = this.points.length; i < l; i++) {
       let point = this.points[i];
       if (i === 0) {
-        context.moveTo(point.x, point.y);
+        context.moveTo(point[0], point[1]);
       } else {
-        context.lineTo(point.x, point.y);
+        context.lineTo(point[0], point[1]);
       }
     }
 
