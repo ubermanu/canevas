@@ -59,7 +59,9 @@ class Canvas {
       return;
     }
 
-    if (this.autoClear) this.clear();
+    if (this.autoClear) {
+      this.clear();
+    }
 
     // Load camera context
     context.save();
