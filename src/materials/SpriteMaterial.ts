@@ -20,7 +20,7 @@ class SpriteMaterial extends ImageMaterial {
 
   repeat: boolean = true;
 
-  constructor(options: SpriteMaterialOptions) {
+  constructor(options: SpriteMaterialOptions = {}) {
     super(options);
 
     if (options.frame !== undefined) {
@@ -89,14 +89,14 @@ class SpriteMaterial extends ImageMaterial {
 
 // SpriteMaterial constructor options.
 interface SpriteMaterialOptions extends ImageMaterialOptions {
-  frame: number;
-  duration: number;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  length: number;
-  repeat: boolean;
+  frame?: number;
+  duration?: number;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  length?: number;
+  repeat?: boolean;
 }
 
 export { SpriteMaterial, SpriteMaterialOptions };

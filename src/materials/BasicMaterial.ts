@@ -14,7 +14,7 @@ class BasicMaterial extends Material {
   wireframe: boolean = false;
   color: Color = new Color(0x000000);
 
-  constructor(options: BasicMaterialOptions) {
+  constructor(options: BasicMaterialOptions = {}) {
     super(options);
 
     if (options.wireframe !== undefined) {

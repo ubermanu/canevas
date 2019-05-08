@@ -12,7 +12,7 @@ class ImageMaterial extends Material {
   clip: boolean = true;
   image: HTMLImageElement = new Image();
 
-  constructor(options: ImageMaterialOptions) {
+  constructor(options: ImageMaterialOptions = {}) {
     super(options);
 
     if (options.clip !== undefined) {
