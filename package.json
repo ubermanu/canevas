@@ -1,12 +1,12 @@
 {
-  "name": "silk.js",
+  "name": "ng",
   "version": "3",
-  "description": "2D Canvas Renderer",
+  "description": "2D canvas renderer",
   "author": "ubermanu",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ubermanu/silk.js.git"
+    "url": "git://github.com/ubermanu/ng.git"
   },
   "scripts": {
     "build": "rollup -c"
@@ -14,6 +14,7 @@
   "devDependencies": {
     "rollup": "^1.11.3",
     "rollup-plugin-typescript": "^1.0.1",
+    "rollup-plugin-uglify": "^6.0.2",
     "tslib": "^1.9.3",
     "typescript": "^3.4.5"
   }
