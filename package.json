@@ -9,7 +9,8 @@
     "url": "git://github.com/ubermanu/cc.git"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "watch": "rollup -c -w src"
   },
   "devDependencies": {
     "rollup": "^1.11.3",
