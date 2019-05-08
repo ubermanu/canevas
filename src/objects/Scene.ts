@@ -7,11 +7,12 @@ import { Mesh } from "./Mesh";
 class Scene extends Object2D {
 
   type: string = 'Scene';
+  children: Mesh[] = [];
 
   /**
    * Render the scene meshes recursively.
    */
-  render(context: CanvasRenderingContext2D, children: Mesh[] = []) {
+  render(context: CanvasRenderingContext2D, children?: Mesh[]) {
 
     // Get scene children if not defined
     // This case is mostly the start of the loop
