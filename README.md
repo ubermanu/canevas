@@ -1,11 +1,12 @@
-silk.js
+ng.js
 ========
+
 2D Canvas renderer based on [THREE.js](https://github.com/mrdoob/three.js) format
 
 ### Usage ###
 
 ```html
-<script src="silk.min.js"></script>
+<script src="ng.min.js"></script>
 
 <script>
 
@@ -18,22 +19,22 @@ silk.js
     function init () {
 
         // Main renderer
-        canvas = new SILK.Canvas();
+        canvas = new ng.Canvas();
         canvas.setSize(window.innerWidth, window.innerHeight);
 
         // Contains all the meshes to render
-        scene = new SILK.Scene();
+        scene = new ng.Scene();
 
         // Will move into the scene
-        camera = new SILK.Camera();
+        camera = new ng.Camera();
         camera.position.set(window.innerWidth / 2, window.innerHeight / 2);
 
         // Mesh properties
-        material = new SILK.BasicMaterial({ wireframe: true, color: 0xff0000 });
-        shape = new SILK.BoxShape({ width: 80, height: 80 });
+        material = new ng.BasicMaterial({ wireframe: true, color: 0xff0000 });
+        shape = new ng.BoxShape({ width: 80, height: 80 });
 
         // Add mesh to the scene
-        mesh = new SILK.Mesh(shape, material);
+        mesh = new ng.Mesh(shape, material);
         scene.add(mesh);
 
         // Append canvas to the body
