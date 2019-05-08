@@ -1,12 +1,12 @@
-ng.js
+Canvas Renderer
 ========
 
-2D Canvas renderer based on [THREE.js](https://github.com/mrdoob/three.js) format
+HTML5 Canvas renderer based on [THREE.js](https://github.com/mrdoob/three.js) format.
 
 ### Usage ###
 
 ```html
-<script src="ng.min.js"></script>
+<script src="cc.min.js"></script>
 
 <script>
 
@@ -19,22 +19,22 @@ ng.js
     function init () {
 
         // Main renderer
-        canvas = new ng.Canvas();
+        canvas = new cc.Canvas();
         canvas.setSize(window.innerWidth, window.innerHeight);
 
         // Contains all the meshes to render
-        scene = new ng.Scene();
+        scene = new cc.Scene();
 
         // Will move into the scene
-        camera = new ng.Camera();
+        camera = new cc.Camera();
         camera.position.set(window.innerWidth / 2, window.innerHeight / 2);
 
         // Mesh properties
-        material = new ng.BasicMaterial({ wireframe: true, color: 0xff0000 });
-        shape = new ng.BoxShape({ width: 80, height: 80 });
+        material = new cc.BasicMaterial({ wireframe: true, color: 0xff0000 });
+        shape = new cc.BoxShape({ width: 80, height: 80 });
 
         // Add mesh to the scene
-        mesh = new ng.Mesh(shape, material);
+        mesh = new cc.Mesh(shape, material);
         scene.add(mesh);
 
         // Append canvas to the body
