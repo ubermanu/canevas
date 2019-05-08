@@ -9,6 +9,9 @@
     "url": "git://github.com/ubermanu/silk.js.git"
   },
   "devDependencies": {
+    "rollup": "^1.11.3",
+    "rollup-plugin-typescript": "^1.0.1",
+    "tslib": "^1.9.3",
     "typescript": "^3.4.5"
   }
 }
