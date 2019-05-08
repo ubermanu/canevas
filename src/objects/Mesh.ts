@@ -1,42 +1,35 @@
 import { Object2D } from "../core/Object2D";
-import { BasicMaterial } from "../materials/BasicMaterial";
+import { Shape } from "../core/Shape";
+import { Material } from "../core/Material";
 
 /**
  * Mesh
  *
  * A basic Object2D that handle its shape and its material
- *
- * @param {Shape} shape
- * @param {Material} material
  */
 class Mesh extends Object2D {
 
-  /** @type {string} */
   type = 'Mesh';
 
-  // /** @type {Shape} */
-  shape;
+  children: Array<Mesh> = [];
 
-  // /** @type {Material} */
-  material;
+  shape: Shape;
+  material: Material;
 
-  constructor(shape, material, options = {}) {
+  constructor(shape: Shape, material: Material, options?: object) {
     super(options);
-
-    /** @type {Shape} */
     this.shape = shape;
-
-    /** @type {Material} */
-    this.material = material !== undefined ? material : new BasicMaterial({ color: Math.random() * 0xffffff });
+    this.material = material;
   }
 
   /**
-   * Render
+   * Render the mesh shape and material in its own context.
+   * Restore the default context afterwards.
    */
-  render = function (context) {
+  render(context: CanvasRenderingContext2D) {
 
     // Limit rotation value to a whole 360
-    this.rotation %= Math.PI / 2;
+    this.rotation %= (Math.PI / 2);
 
     if (this.visible) {
 
