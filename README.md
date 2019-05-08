@@ -38,7 +38,7 @@ HTML5 Canvas renderer based on [THREE.js](https://github.com/mrdoob/three.js) fo
         scene.add(mesh);
 
         // Append canvas to the body
-        document.body.appendChild(canvas.domElement);
+        document.body.appendChild(canvas.element);
     }
 
     function animate () {
