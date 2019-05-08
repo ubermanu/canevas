@@ -9,13 +9,8 @@ import { Scene } from "../objects/Scene";
  */
 class Canvas {
 
-  protected element = document.createElement('canvas');
-
-  /** @type {CanvasRenderingContext2D} */
-  protected context = this.element.getContext('2d');
-
-  /** @type {boolean} */
-  protected autoClear = true;
+  element: HTMLCanvasElement = document.createElement('canvas');
+  autoClear: boolean = true;
 
   /**
    * Resize the canvas and its container
@@ -23,7 +18,7 @@ class Canvas {
    * @param {number} width
    * @param {number} height
    */
-  setSize(width, height) {
+  setSize(width: number, height: number) {
     this.element.width = width;
     this.element.height = height;
     this.element.style.width = width + 'px';
@@ -34,49 +29,61 @@ class Canvas {
    * Clear the canvas
    */
   clear() {
-    this.context.clearRect(0, 0, this.element.width, this.element.height);
+    const context = this.element.getContext('2d');
+    if (context) {
+      context.clearRect(0, 0, this.element.width, this.element.height);
+    }
   }
 
   /**
-   * Main render function
+   * Main rendering function.
    *
    * @param {Scene} scene
    * @param {Camera} camera
    */
-  render(scene, camera) {
+  render(scene: Scene, camera: Camera) {
+
+    const context = this.element.getContext('2d');
+
+    if (context === null) {
+      return;
+    }
 
     if (!(scene instanceof Scene)) {
-      console.error('SILK.Canvas.render: scene is not an instance of SILK.Scene', scene);
+      console.error('Canvas.render: scene is not an instance of Scene', scene);
       return;
     }
 
     if (!(camera instanceof Camera)) {
-      console.error('SILK.Canvas.render: camera is not an instance of SILK.Camera', camera);
+      console.error('Canvas.render: camera is not an instance of Camera', camera);
       return;
     }
 
     if (this.autoClear) this.clear();
 
     // Load camera context
-    this.context.save();
-    this.context.translate(camera.position.x, camera.position.y);
-    this.context.rotate(camera.rotation);
-    this.context.scale(camera.zoom, camera.zoom);
+    context.save();
+    context.translate(camera.position.x, camera.position.y);
+    context.rotate(camera.rotation);
+    context.scale(camera.zoom, camera.zoom);
 
     // Render scene
-    scene.render(this.context);
+    scene.render(context);
 
     // Restore camera context
-    this.context.restore();
+    context.restore();
   }
 
   /**
-   * Enable or disable smoothing
+   * Enable or disable smoothing.
    *
-   * @param {bool} smoothing
+   * @param {boolean} smoothing
    */
-  setSmoothing(smoothing) {
-    this.context.imageSmoothingEnabled = smoothing;
+  setSmoothing(smoothing: boolean) {
+    const context = this.element.getContext('2d');
+    if (context) {
+      context.imageSmoothingEnabled = smoothing;
+    }
   }
 }
 
