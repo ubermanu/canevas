@@ -1,4 +1,4 @@
-import Object2D from "../core/Object2D";
+import { Object2D } from "../core/Object2D";
 
 /**
  * Scene
@@ -33,4 +33,4 @@ class Scene extends Object2D {
   }
 }
 
-export default Scene;
+export { Scene };

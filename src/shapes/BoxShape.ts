@@ -1,4 +1,4 @@
-import Shape from "../core/Shape";
+import { Shape } from "../core/Shape";
 
 /**
  * BoxShape
@@ -37,4 +37,4 @@ class BoxShape extends Shape {
   }
 }
 
-export default BoxShape;
+export { BoxShape };

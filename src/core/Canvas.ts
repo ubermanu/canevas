@@ -1,5 +1,5 @@
-import Camera from "./Camera";
-import Scene from "../objects/Scene";
+import { Camera } from "./Camera";
+import { Scene } from "../objects/Scene";
 
 /**
  * Canvas
@@ -80,4 +80,4 @@ class Canvas {
   }
 }
 
-export default Canvas;
+export { Canvas };

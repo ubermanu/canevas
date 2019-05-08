@@ -37,4 +37,4 @@ class Color {
   }
 }
 
-export default Color;
+export { Color };

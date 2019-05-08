@@ -1,5 +1,5 @@
-import Material from "../core/Material";
-import Color from "../math/Color";
+import { Material } from "../core/Material";
+import { Color } from "../math/Color";
 
 /**
  * BasicMaterial
@@ -27,7 +27,7 @@ class BasicMaterial extends Material {
   /**
    * Render
    */
-  render (context) {
+  render(context) {
 
     // Call Material initial context rendering
     this.render.call(this, context);
@@ -42,4 +42,4 @@ class BasicMaterial extends Material {
   }
 }
 
-export default BasicMaterial;
+export { BasicMaterial };

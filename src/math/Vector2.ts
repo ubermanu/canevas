@@ -116,4 +116,4 @@ class Vector2 {
   }
 }
 
-export default Vector2;
+export { Vector2 };

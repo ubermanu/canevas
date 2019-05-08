@@ -1,4 +1,4 @@
-import PolygonShape from "./PolygonShape";
+import { PolygonShape } from "./PolygonShape";
 
 /**
  * TriangleShape
@@ -14,4 +14,4 @@ class TriangleShape extends PolygonShape {
   }
 }
 
-export default TriangleShape;
+export { TriangleShape };

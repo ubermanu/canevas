@@ -1,4 +1,4 @@
-import Material from "../core/Material";
+import { Material } from "../core/Material";
 
 /**
  * ImageMaterial
@@ -39,4 +39,4 @@ class ImageMaterial extends Material {
   }
 }
 
-export default ImageMaterial;
+export { ImageMaterial };

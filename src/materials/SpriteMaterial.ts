@@ -1,4 +1,4 @@
-import ImageMaterial from "./ImageMaterial";
+import { ImageMaterial } from "./ImageMaterial";
 
 /**
  * SpriteMaterial
@@ -77,4 +77,4 @@ class SpriteMaterial extends ImageMaterial {
   }
 }
 
-export default SpriteMaterial;
+export { SpriteMaterial };

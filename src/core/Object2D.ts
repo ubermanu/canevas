@@ -1,4 +1,4 @@
-import Vector2 from "../math/Vector2";
+import { Vector2 } from "../math/Vector2";
 
 /**
  * Object2D
@@ -95,4 +95,4 @@ class Object2D {
 /** @const {number} */
 let Object2DIdCount = 0;
 
-export default Object2D;
+export { Object2D };

@@ -39,4 +39,4 @@ abstract class Shape {
   }
 }
 
-export default Shape;
+export { Shape };

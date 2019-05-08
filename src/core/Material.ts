@@ -23,4 +23,4 @@ class Material {
   }
 }
 
-export default Material;
+export { Material };

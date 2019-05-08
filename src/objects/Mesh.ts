@@ -1,5 +1,5 @@
-import Object2D from "../core/Object2D";
-import BasicMaterial from "../materials/BasicMaterial";
+import { Object2D } from "../core/Object2D";
+import { BasicMaterial } from "../materials/BasicMaterial";
 
 /**
  * Mesh
@@ -56,4 +56,4 @@ class Mesh extends Object2D {
   }
 }
 
-export default Mesh;
+export { Mesh };

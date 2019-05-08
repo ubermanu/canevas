@@ -1,4 +1,4 @@
-import Shape from "../core/Shape";
+import { Shape } from "../core/Shape";
 
 /**
  * CircleShape
@@ -33,4 +33,4 @@ class CircleShape extends Shape {
   }
 }
 
-export default CircleShape;
+export { CircleShape };

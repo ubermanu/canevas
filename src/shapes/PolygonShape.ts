@@ -1,5 +1,5 @@
-import Shape from "../core/Shape";
-import Vector2 from "../math/Vector2";
+import { Shape } from "../core/Shape";
+import { Vector2 } from "../math/Vector2";
 
 /**
  * PolygonShape
@@ -48,4 +48,4 @@ class PolygonShape extends Shape {
   }
 }
 
-export default PolygonShape;
+export { PolygonShape };
