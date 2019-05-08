@@ -1,12 +1,12 @@
 {
-  "name": "ng",
+  "name": "cc",
   "version": "3",
   "description": "2D canvas renderer",
   "author": "ubermanu",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ubermanu/ng.git"
+    "url": "git://github.com/ubermanu/cc.git"
   },
   "scripts": {
     "build": "rollup -c"

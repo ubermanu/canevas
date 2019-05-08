@@ -9,8 +9,8 @@ export default [
     ],
     output: {
       format: 'umd',
-      name: 'ng',
-      file: 'dist/ng.js'
+      name: 'cc',
+      file: 'dist/cc.js'
     }
   },
   {
@@ -21,8 +21,8 @@ export default [
     ],
     output: {
       format: 'umd',
-      name: 'ng',
-      file: 'dist/ng.min.js'
+      name: 'cc',
+      file: 'dist/cc.min.js'
     }
   }
 ];
