@@ -1,4 +1,4 @@
-import { Material } from "../core/Material";
+import { Material, MaterialOptions } from "../core/Material";
 
 /**
  * ImageMaterial
@@ -7,31 +7,35 @@ import { Material } from "../core/Material";
  */
 class ImageMaterial extends Material {
 
-  /** @type {string} */
-  type = 'ImageMaterial';
+  type: string = 'ImageMaterial';
 
-  /** @type {boolean} */
-  clip = true;
+  clip: boolean = true;
+  image: HTMLImageElement = new Image();
 
-  /** @type {Element} */
-  image = document.createElement('img');
-
-  constructor(options) {
+  constructor(options: ImageMaterialOptions) {
     super(options);
-    this.clip = options.clip !== undefined ? options.clip : true;
-    this.image.src = options.src !== undefined ? options.src : '';
+
+    if (options.clip !== undefined) {
+      this.clip = options.clip;
+    }
+
+    if (options.src !== undefined) {
+      this.image.src = options.src;
+    }
   }
 
   /**
    * Render
    */
-  render(context) {
+  render(context: CanvasRenderingContext2D) {
 
     // Call Material initial context rendering
-    this.render.call(this, context);
+    super.render(context);
 
     // Crop the image to fit in the shape
-    if (this.clip) context.clip();
+    if (this.clip) {
+      context.clip();
+    }
 
     // Render image in the center of the object
     // TODO: Add offset the properties?
@@ -39,4 +43,10 @@ class ImageMaterial extends Material {
   }
 }
 
-export { ImageMaterial };
+// ImageMaterial constructor options.
+interface ImageMaterialOptions extends MaterialOptions {
+  clip?: boolean;
+  src?: string;
+}
+
+export { ImageMaterial, ImageMaterialOptions };

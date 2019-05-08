@@ -1,4 +1,4 @@
-import { ImageMaterial } from "./ImageMaterial";
+import { ImageMaterial, ImageMaterialOptions } from "./ImageMaterial";
 
 /**
  * SpriteMaterial
@@ -7,51 +7,61 @@ import { ImageMaterial } from "./ImageMaterial";
  */
 class SpriteMaterial extends ImageMaterial {
 
-  /** @type {string} */
-  type = 'SpriteMaterial';
+  type: string = 'SpriteMaterial';
 
-  /** @type {number} */
-  frame = 1;
+  frame: number = 1;
+  duration: number = 1;
 
-  /** @type {number} */
-  duration = 1;
+  x: number = 0;
+  y: number = 0;
+  width: number = 0;
+  height: number = 0;
+  length: number = 1;
 
-  /** @type {number} */
-  x = 0;
+  repeat: boolean = true;
 
-  /** @type {number} */
-  y = 0;
-
-  /** @type {number} */
-  width = 0;
-
-  /** @type {number} */
-  height = 0;
-
-  /** @type {number} */
-  length = 1;
-
-  /** @type {boolean} */
-  repeat = true;
-
-  constructor(options) {
+  constructor(options: SpriteMaterialOptions) {
     super(options);
-    this.frame = options.frame !== undefined ? options.frame : 1;
-    this.duration = options.duration !== undefined ? options.duration : 1;
-    this.x = options.x !== undefined ? options.x : 0;
-    this.y = options.y !== undefined ? options.y : 0;
-    this.width = options.width !== undefined ? options.width : 0;
-    this.height = options.height !== undefined ? options.height : 0;
-    this.length = options.length !== undefined ? options.length : 1;
-    this.repeat = options.repeat !== undefined ? options.repeat : true;
+
+    if (options.frame !== undefined) {
+      this.frame = options.frame;
+    }
+
+    if (options.duration !== undefined) {
+      this.duration = options.duration;
+    }
+
+    if (options.x !== undefined) {
+      this.x = options.x;
+    }
+
+    if (options.y !== undefined) {
+      this.y = options.y;
+    }
+
+    if (options.width !== undefined) {
+      this.width = options.width;
+    }
+
+    if (options.height !== undefined) {
+      this.height = options.height;
+    }
+
+    if (options.length !== undefined) {
+      this.length = options.length;
+    }
+
+    if (options.repeat !== undefined) {
+      this.repeat = options.repeat;
+    }
   }
   /**
    * Render the part of an image depending on the frame counter
    */
-  render(context) {
+  render(context: CanvasRenderingContext2D) {
 
     // Call Material initial context rendering
-    this.render.call(this, context);
+    super.render(context);
 
     // Increase frame index (in the length range)
     this.frame += 1 / this.duration;
@@ -77,4 +87,16 @@ class SpriteMaterial extends ImageMaterial {
   }
 }
 
-export { SpriteMaterial };
+// SpriteMaterial constructor options.
+interface SpriteMaterialOptions extends ImageMaterialOptions {
+  frame: number;
+  duration: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  length: number;
+  repeat: boolean;
+}
+
+export { SpriteMaterial, SpriteMaterialOptions };

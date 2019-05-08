@@ -1,4 +1,4 @@
-import { Material } from "../core/Material";
+import { Material, MaterialOptions } from "../core/Material";
 import { Color } from "../math/Color";
 
 /**
@@ -9,28 +9,30 @@ import { Color } from "../math/Color";
  */
 class BasicMaterial extends Material {
 
-  /** @type {string} */
-  type = 'BasicMaterial';
+  type: string = 'BasicMaterial';
 
-  /** @type {boolean} */
-  wireframe = false;
+  wireframe: boolean = false;
+  color: Color = new Color(0x000000);
 
-  /** @type {Color} */
-  color;
-
-  constructor(options) {
+  constructor(options: BasicMaterialOptions) {
     super(options);
-    this.wireframe = options.wireframe !== undefined ? options.wireframe : false;
-    this.color = new Color(options.color !== undefined ? options.color : 0x000000);
+
+    if (options.wireframe !== undefined) {
+      this.wireframe = options.wireframe;
+    }
+
+    if (options.color !== undefined) {
+      this.color = new Color(options.color);
+    }
   }
 
   /**
    * Render
    */
-  render(context) {
+  render(context: CanvasRenderingContext2D) {
 
     // Call Material initial context rendering
-    this.render.call(this, context);
+    super.render(context);
 
     if (this.wireframe) {
       context.strokeStyle = this.color.getStyle();
@@ -42,4 +44,10 @@ class BasicMaterial extends Material {
   }
 }
 
-export { BasicMaterial };
+// BasicMaterial constructor options.
+interface BasicMaterialOptions extends MaterialOptions {
+  wireframe?: boolean;
+  color?: number;
+}
+
+export { BasicMaterial, BasicMaterialOptions };
