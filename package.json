@@ -1,12 +1,15 @@
 {
   "name": "silk.js",
-  "version": "0.2.0",
+  "version": "3",
   "description": "2D Canvas Renderer",
   "author": "ubermanu",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/ubermanu/silk.js.git"
+  },
+  "scripts": {
+    "build": "rollup -c"
   },
   "devDependencies": {
     "rollup": "^1.11.3",
