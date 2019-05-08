@@ -10,11 +10,8 @@ class Scene extends Object2D {
 
   /**
    * Render the scene meshes recursively.
-   *
-   * @param {CanvasRenderingContext2D} context
-   * @param {Array<Mesh>} children
    */
-  render(context: CanvasRenderingContext2D, children: Array<Mesh> = []) {
+  render(context: CanvasRenderingContext2D, children: Mesh[] = []) {
 
     // Get scene children if not defined
     // This case is mostly the start of the loop

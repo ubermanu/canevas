@@ -11,7 +11,7 @@ class Mesh extends Object2D {
 
   type = 'Mesh';
 
-  children: Array<Mesh> = [];
+  children: Mesh[] = [];
 
   shape: Shape;
   material: Material;
