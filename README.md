@@ -49,7 +49,3 @@ HTML5 Canvas renderer based on [THREE.js](https://github.com/mrdoob/three.js) fo
 
 </script>
 ```
-
-### Example ###
-
-Here is a link to a [JSFiddle](https://jsfiddle.net/ubermanu/091b7k3x/)
