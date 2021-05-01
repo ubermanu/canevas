@@ -1,28 +1,31 @@
-import typescript from 'rollup-plugin-typescript';
-import { uglify } from 'rollup-plugin-uglify';
+import typescript from '@rollup/plugin-typescript'
+import { terser } from 'rollup-plugin-terser'
 
 export default [
   {
     input: 'src/index.ts',
-    plugins: [
-      typescript()
-    ],
     output: {
       format: 'umd',
       name: 'cc',
-      file: 'dist/cc.js'
-    }
+      file: 'dist/canevas.js',
+    },
+    plugins: [typescript()],
   },
   {
     input: 'src/index.ts',
-    plugins: [
-      typescript(),
-      uglify()
-    ],
     output: {
       format: 'umd',
       name: 'cc',
-      file: 'dist/cc.min.js'
-    }
-  }
-];
+      file: 'dist/canevas.min.js',
+    },
+    plugins: [typescript(), terser()],
+  },
+  {
+    input: 'src/index.ts',
+    output: {
+      format: 'es',
+      file: 'dist/canevas.mjs',
+    },
+    plugins: [typescript()],
+  },
+]
