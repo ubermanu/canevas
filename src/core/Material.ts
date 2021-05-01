@@ -5,8 +5,8 @@
  * For example it can be a color, an image or an animated sprite
  */
 export class Material {
-  type = 'Material'
-  opacity = 1.0
+  type: string = 'Material'
+  opacity: number = 1.0
 
   constructor(options: MaterialOptions = {}) {
     if (options.opacity !== undefined) {
