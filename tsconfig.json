@@ -1,5 +1,9 @@
 {
   "typedocOptions": {
+    "name": "Canevas",
+    "includeVersion": true,
+    "theme": "minimal",
+    "highlightTheme": "github-light",
     "entryPoints": [
       "src/index.ts"
     ],
