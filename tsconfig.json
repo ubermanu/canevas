@@ -2,8 +2,8 @@
   "typedocOptions": {
     "name": "Canevas",
     "includeVersion": true,
-    "theme": "minimal",
-    "highlightTheme": "github-light",
+    "theme": "node_modules/g8-typedoc-dark/default",
+    "highlightTheme": "github-dark",
     "entryPoints": [
       "src/index.ts"
     ],
