@@ -13,8 +13,7 @@
     "build": "rollup -c",
     "watch": "rollup -c -w src",
     "docs": "typedoc",
-    "predeploy": "npm run docs",
-    "deploy": "gh-pages -d docs"
+    "deploy": "typedoc && gh-pages -d docs"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.2.1",
