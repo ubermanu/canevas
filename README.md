@@ -1,9 +1,8 @@
-Canvas Renderer
-========
+# Canevas
 
-HTML5 Canvas renderer based on [THREE.js](https://github.com/mrdoob/three.js) format.
+HTML Canvas renderer based on [THREE.js](https://github.com/mrdoob/three.js).
 
-### Usage ###
+## Example
 
 ```js
 import { BasicMaterial, BoxShape, Camera, Canvas, Mesh, Scene } from "dist/canevas.mjs";
