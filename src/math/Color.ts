@@ -1,19 +1,16 @@
 /**
  * Color
- *
- * @param {number} color
- * @return {this}
  */
 export class Color {
-  r = 1
-  g = 1
-  b = 1
+  r: number = 1
+  g: number = 1
+  b: number = 1
 
-  constructor(color) {
+  constructor(color: number) {
     this.setHex(color)
   }
 
-  setHex(hex) {
+  setHex(hex: number): Color {
     hex = Math.floor(hex)
     this.r = ((hex >> 16) & 255) / 255
     this.g = ((hex >> 8) & 255) / 255
@@ -21,15 +18,15 @@ export class Color {
     return this
   }
 
-  setRGB(r, g, b) {
+  setRGB(r: number, g: number, b: number): Color {
     this.r = r
     this.g = g
     this.b = b
     return this
   }
 
-  getStyle() {
-    var _r = (this.r * 255) | 0,
+  getStyle(): string {
+    const _r = (this.r * 255) | 0,
       _g = (this.g * 255) | 0,
       _b = (this.b * 255) | 0
     return 'rgb(' + _r + ',' + _g + ',' + _b + ')'
