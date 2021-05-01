@@ -1,0 +1,222 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>canevas</title>
+	<meta name="description" content="Documentation for canevas">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">canevas</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>canevas</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#canevas" id="canevas" style="color: inherit; text-decoration: none;">
+					<h1>Canevas</h1>
+				</a>
+				<p>HTML Canvas renderer based on <a href="https://github.com/mrdoob/three.js">THREE.js</a>.</p>
+				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+					<h2>Example</h2>
+				</a>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">BasicMaterial</span><span style="color: #000000">, </span><span style="color: #001080">BoxShape</span><span style="color: #000000">, </span><span style="color: #001080">Camera</span><span style="color: #000000">, </span><span style="color: #001080">Canvas</span><span style="color: #000000">, </span><span style="color: #001080">Mesh</span><span style="color: #000000">, </span><span style="color: #001080">Scene</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;dist/canevas.mjs&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">canvas</span><span style="color: #000000">, </span><span style="color: #001080">scene</span><span style="color: #000000">, </span><span style="color: #001080">camera</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">shape</span><span style="color: #000000">, </span><span style="color: #001080">material</span><span style="color: #000000">, </span><span style="color: #001080">mesh</span><span style="color: #000000">;</span>
+
+<span style="color: #795E26">init</span><span style="color: #000000">();</span>
+<span style="color: #795E26">animate</span><span style="color: #000000">();</span>
+
+<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">init</span><span style="color: #000000">() {</span>
+
+<span style="color: #000000">    </span><span style="color: #008000">// Main renderer</span>
+<span style="color: #000000">    </span><span style="color: #001080">canvas</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Canvas</span><span style="color: #000000">();</span>
+<span style="color: #000000">    </span><span style="color: #001080">canvas</span><span style="color: #000000">.</span><span style="color: #795E26">setSize</span><span style="color: #000000">(</span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">innerWidth</span><span style="color: #000000">, </span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">innerHeight</span><span style="color: #000000">);</span>
+
+<span style="color: #000000">    </span><span style="color: #008000">// Contains all the meshes to render</span>
+<span style="color: #000000">    </span><span style="color: #001080">scene</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Scene</span><span style="color: #000000">();</span>
+
+<span style="color: #000000">    </span><span style="color: #008000">// Will move into the scene</span>
+<span style="color: #000000">    </span><span style="color: #001080">camera</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Camera</span><span style="color: #000000">();</span>
+<span style="color: #000000">    </span><span style="color: #001080">camera</span><span style="color: #000000">.</span><span style="color: #001080">position</span><span style="color: #000000">.</span><span style="color: #795E26">set</span><span style="color: #000000">(</span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">innerWidth</span><span style="color: #000000"> / </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">innerHeight</span><span style="color: #000000"> / </span><span style="color: #098658">2</span><span style="color: #000000">);</span>
+
+<span style="color: #000000">    </span><span style="color: #008000">// Mesh properties</span>
+<span style="color: #000000">    </span><span style="color: #001080">material</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">BasicMaterial</span><span style="color: #000000">({ </span><span style="color: #001080">wireframe:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">, </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #098658">0xff0000</span><span style="color: #000000"> });</span>
+<span style="color: #000000">    </span><span style="color: #001080">shape</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">BoxShape</span><span style="color: #000000">({ </span><span style="color: #001080">width:</span><span style="color: #000000"> </span><span style="color: #098658">80</span><span style="color: #000000">, </span><span style="color: #001080">height:</span><span style="color: #000000"> </span><span style="color: #098658">80</span><span style="color: #000000"> });</span>
+
+<span style="color: #000000">    </span><span style="color: #008000">// Add mesh to the scene</span>
+<span style="color: #000000">    </span><span style="color: #001080">mesh</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Mesh</span><span style="color: #000000">(</span><span style="color: #001080">shape</span><span style="color: #000000">, </span><span style="color: #001080">material</span><span style="color: #000000">);</span>
+<span style="color: #000000">    </span><span style="color: #001080">scene</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #001080">mesh</span><span style="color: #000000">);</span>
+
+<span style="color: #000000">    </span><span style="color: #008000">// Append canvas to the body</span>
+<span style="color: #000000">    </span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #795E26">appendChild</span><span style="color: #000000">(</span><span style="color: #001080">canvas</span><span style="color: #000000">.</span><span style="color: #001080">element</span><span style="color: #000000">);</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">animate</span><span style="color: #000000">() {</span>
+<span style="color: #000000">    </span><span style="color: #795E26">requestAnimationFrame</span><span style="color: #000000">(</span><span style="color: #001080">animate</span><span style="color: #000000">);</span>
+<span style="color: #000000">    </span><span style="color: #001080">mesh</span><span style="color: #000000">.</span><span style="color: #001080">rotation</span><span style="color: #000000"> += </span><span style="color: #098658">0.02</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">canvas</span><span style="color: #000000">.</span><span style="color: #795E26">render</span><span style="color: #000000">(</span><span style="color: #001080">scene</span><span style="color: #000000">, </span><span style="color: #001080">camera</span><span style="color: #000000">);</span>
+<span style="color: #000000">}</span>
+</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/basicmaterial.html" class="tsd-kind-icon">Basic<wbr>Material</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/boxshape.html" class="tsd-kind-icon">Box<wbr>Shape</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/camera.html" class="tsd-kind-icon">Camera</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/canvas.html" class="tsd-kind-icon">Canvas</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/circleshape.html" class="tsd-kind-icon">Circle<wbr>Shape</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/color.html" class="tsd-kind-icon">Color</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/imagematerial.html" class="tsd-kind-icon">Image<wbr>Material</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/material.html" class="tsd-kind-icon">Material</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/mesh.html" class="tsd-kind-icon">Mesh</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/object2d.html" class="tsd-kind-icon">Object2D</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/polygonshape.html" class="tsd-kind-icon">Polygon<wbr>Shape</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/scene.html" class="tsd-kind-icon">Scene</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/shape.html" class="tsd-kind-icon">Shape</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/spritematerial.html" class="tsd-kind-icon">Sprite<wbr>Material</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/triangleshape.html" class="tsd-kind-icon">Triangle<wbr>Shape</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/vector2.html" class="tsd-kind-icon">Vector2</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/basicmaterialoptions.html" class="tsd-kind-icon">Basic<wbr>Material<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/boxshapeoptions.html" class="tsd-kind-icon">Box<wbr>Shape<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/circleshapeoptions.html" class="tsd-kind-icon">Circle<wbr>Shape<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/imagematerialoptions.html" class="tsd-kind-icon">Image<wbr>Material<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/materialoptions.html" class="tsd-kind-icon">Material<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/object2doptions.html" class="tsd-kind-icon">Object2DOptions</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/polygonshapeoptions.html" class="tsd-kind-icon">Polygon<wbr>Shape<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/spritematerialoptions.html" class="tsd-kind-icon">Sprite<wbr>Material<wbr>Options</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
