@@ -25,21 +25,10 @@ export class Object2D {
    * @param options
    */
   constructor(options: Object2DOptions = {}) {
-    if (options.position !== undefined) {
-      this.position = options.position
-    }
-
-    if (options.rotation !== undefined) {
-      this.rotation = options.rotation
-    }
-
-    if (options.scale !== undefined) {
-      this.scale = options.scale
-    }
-
-    if (options.visible !== undefined) {
-      this.visible = options.visible
-    }
+    this.position = options.position ?? this.position
+    this.rotation = options.rotation ?? this.rotation
+    this.scale = options.scale ?? this.scale
+    this.visible = options.visible ?? this.visible
   }
 
   /**

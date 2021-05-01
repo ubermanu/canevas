@@ -21,38 +21,14 @@ export class SpriteMaterial extends ImageMaterial {
 
   constructor(options: SpriteMaterialOptions = {}) {
     super(options)
-
-    if (options.frame !== undefined) {
-      this.frame = options.frame
-    }
-
-    if (options.duration !== undefined) {
-      this.duration = options.duration
-    }
-
-    if (options.x !== undefined) {
-      this.x = options.x
-    }
-
-    if (options.y !== undefined) {
-      this.y = options.y
-    }
-
-    if (options.width !== undefined) {
-      this.width = options.width
-    }
-
-    if (options.height !== undefined) {
-      this.height = options.height
-    }
-
-    if (options.length !== undefined) {
-      this.length = options.length
-    }
-
-    if (options.repeat !== undefined) {
-      this.repeat = options.repeat
-    }
+    this.frame = options.frame ?? this.frame
+    this.duration = options.duration ?? this.duration
+    this.x = options.x ?? this.x
+    this.y = options.y ?? this.y
+    this.width = options.width ?? this.width
+    this.height = options.height ?? this.height
+    this.length = options.length ?? this.length
+    this.repeat = options.repeat ?? this.repeat
   }
 
   /**

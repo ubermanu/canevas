@@ -15,14 +15,8 @@ export class BasicMaterial extends Material {
 
   constructor(options: BasicMaterialOptions = {}) {
     super(options)
-
-    if (options.wireframe !== undefined) {
-      this.wireframe = options.wireframe
-    }
-
-    if (options.color !== undefined) {
-      this.color = new Color(options.color)
-    }
+    this.wireframe = options.wireframe ?? this.wireframe
+    this.color = new Color(options.color) ?? this.color
   }
 
   /**

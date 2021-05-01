@@ -13,14 +13,8 @@ export class ImageMaterial extends Material {
 
   constructor(options: ImageMaterialOptions = {}) {
     super(options)
-
-    if (options.clip !== undefined) {
-      this.clip = options.clip
-    }
-
-    if (options.src !== undefined) {
-      this.image.src = options.src
-    }
+    this.clip = options.clip ?? this.clip
+    this.image.src = options.src ?? this.image.src
   }
 
   /**

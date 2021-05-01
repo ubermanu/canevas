@@ -12,14 +12,8 @@ export class PolygonShape extends Shape {
 
   constructor(options: PolygonShapeOptions) {
     super()
-
-    if (options.faces !== undefined) {
-      this.faces = options.faces
-    }
-
-    if (options.radius !== undefined) {
-      this.radius = options.radius
-    }
+    this.faces = options.faces ?? this.faces
+    this.radius = options.radius ?? this.radius
 
     // Build the points array from properties
     this.update()
@@ -28,14 +22,14 @@ export class PolygonShape extends Shape {
   // Update points
   update() {
     // Angle for each faces
-    var anglePart = Math.PI / 2 / this.faces
+    const anglePart = Math.PI / 2 / this.faces
 
     // Reset points
     this.points = []
 
     // For each face, add a point
-    for (var i = 0, l = this.faces; i < l; i++) {
-      var corner = new Vector2(
+    for (let i = 0, l = this.faces; i < l; i++) {
+      const corner = new Vector2(
         Math.cos(i * anglePart),
         Math.sin(i * anglePart)
       ).multScalar(this.radius)

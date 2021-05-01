@@ -9,9 +9,7 @@ export class Material {
   opacity: number = 1.0
 
   constructor(options: MaterialOptions = {}) {
-    if (options.opacity !== undefined) {
-      this.opacity = options.opacity
-    }
+    this.opacity = options.opacity ?? this.opacity
   }
 
   render(context: CanvasRenderingContext2D) {
