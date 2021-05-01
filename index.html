@@ -3,11 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>canevas</title>
-	<meta name="description" content="Documentation for canevas">
+	<title>Canevas - v4</title>
+	<meta name="description" content="Documentation for Canevas - v4">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
+	<link rel="stylesheet" href="assets/css/dark.css">
 </head>
 <body>
 <header>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">canevas</a>
+					<a href="index.html" class="title">Canevas - v4</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -50,7 +50,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<h1>canevas</h1>
+			<h1>Canevas - v4</h1>
 		</div>
 	</div>
 </header>
@@ -65,44 +65,44 @@
 				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
 					<h2>Example</h2>
 				</a>
-				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">BasicMaterial</span><span style="color: #000000">, </span><span style="color: #001080">BoxShape</span><span style="color: #000000">, </span><span style="color: #001080">Camera</span><span style="color: #000000">, </span><span style="color: #001080">Canvas</span><span style="color: #000000">, </span><span style="color: #001080">Mesh</span><span style="color: #000000">, </span><span style="color: #001080">Scene</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;dist/canevas.mjs&quot;</span><span style="color: #000000">;</span>
+				<pre><code class="language-js"><span style="color: #F97583">import</span><span style="color: #E1E4E8"> { BasicMaterial, BoxShape, Camera, Canvas, Mesh, Scene } </span><span style="color: #F97583">from</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">&quot;dist/canevas.mjs&quot;</span><span style="color: #E1E4E8">;</span>
 
-<span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">canvas</span><span style="color: #000000">, </span><span style="color: #001080">scene</span><span style="color: #000000">, </span><span style="color: #001080">camera</span><span style="color: #000000">;</span>
-<span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">shape</span><span style="color: #000000">, </span><span style="color: #001080">material</span><span style="color: #000000">, </span><span style="color: #001080">mesh</span><span style="color: #000000">;</span>
+<span style="color: #F97583">let</span><span style="color: #E1E4E8"> canvas, scene, camera;</span>
+<span style="color: #F97583">let</span><span style="color: #E1E4E8"> shape, material, mesh;</span>
 
-<span style="color: #795E26">init</span><span style="color: #000000">();</span>
-<span style="color: #795E26">animate</span><span style="color: #000000">();</span>
+<span style="color: #B392F0">init</span><span style="color: #E1E4E8">();</span>
+<span style="color: #B392F0">animate</span><span style="color: #E1E4E8">();</span>
 
-<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">init</span><span style="color: #000000">() {</span>
+<span style="color: #F97583">function</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">init</span><span style="color: #E1E4E8">() {</span>
 
-<span style="color: #000000">    </span><span style="color: #008000">// Main renderer</span>
-<span style="color: #000000">    </span><span style="color: #001080">canvas</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Canvas</span><span style="color: #000000">();</span>
-<span style="color: #000000">    </span><span style="color: #001080">canvas</span><span style="color: #000000">.</span><span style="color: #795E26">setSize</span><span style="color: #000000">(</span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">innerWidth</span><span style="color: #000000">, </span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">innerHeight</span><span style="color: #000000">);</span>
+<span style="color: #E1E4E8">    </span><span style="color: #6A737D">// Main renderer</span>
+<span style="color: #E1E4E8">    canvas </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">new</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Canvas</span><span style="color: #E1E4E8">();</span>
+<span style="color: #E1E4E8">    canvas.</span><span style="color: #B392F0">setSize</span><span style="color: #E1E4E8">(window.innerWidth, window.innerHeight);</span>
 
-<span style="color: #000000">    </span><span style="color: #008000">// Contains all the meshes to render</span>
-<span style="color: #000000">    </span><span style="color: #001080">scene</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Scene</span><span style="color: #000000">();</span>
+<span style="color: #E1E4E8">    </span><span style="color: #6A737D">// Contains all the meshes to render</span>
+<span style="color: #E1E4E8">    scene </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">new</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Scene</span><span style="color: #E1E4E8">();</span>
 
-<span style="color: #000000">    </span><span style="color: #008000">// Will move into the scene</span>
-<span style="color: #000000">    </span><span style="color: #001080">camera</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Camera</span><span style="color: #000000">();</span>
-<span style="color: #000000">    </span><span style="color: #001080">camera</span><span style="color: #000000">.</span><span style="color: #001080">position</span><span style="color: #000000">.</span><span style="color: #795E26">set</span><span style="color: #000000">(</span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">innerWidth</span><span style="color: #000000"> / </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">innerHeight</span><span style="color: #000000"> / </span><span style="color: #098658">2</span><span style="color: #000000">);</span>
+<span style="color: #E1E4E8">    </span><span style="color: #6A737D">// Will move into the scene</span>
+<span style="color: #E1E4E8">    camera </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">new</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Camera</span><span style="color: #E1E4E8">();</span>
+<span style="color: #E1E4E8">    camera.position.</span><span style="color: #B392F0">set</span><span style="color: #E1E4E8">(window.innerWidth </span><span style="color: #F97583">/</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">2</span><span style="color: #E1E4E8">, window.innerHeight </span><span style="color: #F97583">/</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">2</span><span style="color: #E1E4E8">);</span>
 
-<span style="color: #000000">    </span><span style="color: #008000">// Mesh properties</span>
-<span style="color: #000000">    </span><span style="color: #001080">material</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">BasicMaterial</span><span style="color: #000000">({ </span><span style="color: #001080">wireframe:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">, </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #098658">0xff0000</span><span style="color: #000000"> });</span>
-<span style="color: #000000">    </span><span style="color: #001080">shape</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">BoxShape</span><span style="color: #000000">({ </span><span style="color: #001080">width:</span><span style="color: #000000"> </span><span style="color: #098658">80</span><span style="color: #000000">, </span><span style="color: #001080">height:</span><span style="color: #000000"> </span><span style="color: #098658">80</span><span style="color: #000000"> });</span>
+<span style="color: #E1E4E8">    </span><span style="color: #6A737D">// Mesh properties</span>
+<span style="color: #E1E4E8">    material </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">new</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">BasicMaterial</span><span style="color: #E1E4E8">({ wireframe: </span><span style="color: #79B8FF">true</span><span style="color: #E1E4E8">, color: </span><span style="color: #79B8FF">0xff0000</span><span style="color: #E1E4E8"> });</span>
+<span style="color: #E1E4E8">    shape </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">new</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">BoxShape</span><span style="color: #E1E4E8">({ width: </span><span style="color: #79B8FF">80</span><span style="color: #E1E4E8">, height: </span><span style="color: #79B8FF">80</span><span style="color: #E1E4E8"> });</span>
 
-<span style="color: #000000">    </span><span style="color: #008000">// Add mesh to the scene</span>
-<span style="color: #000000">    </span><span style="color: #001080">mesh</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Mesh</span><span style="color: #000000">(</span><span style="color: #001080">shape</span><span style="color: #000000">, </span><span style="color: #001080">material</span><span style="color: #000000">);</span>
-<span style="color: #000000">    </span><span style="color: #001080">scene</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #001080">mesh</span><span style="color: #000000">);</span>
+<span style="color: #E1E4E8">    </span><span style="color: #6A737D">// Add mesh to the scene</span>
+<span style="color: #E1E4E8">    mesh </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">new</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">Mesh</span><span style="color: #E1E4E8">(shape, material);</span>
+<span style="color: #E1E4E8">    scene.</span><span style="color: #B392F0">add</span><span style="color: #E1E4E8">(mesh);</span>
 
-<span style="color: #000000">    </span><span style="color: #008000">// Append canvas to the body</span>
-<span style="color: #000000">    </span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #795E26">appendChild</span><span style="color: #000000">(</span><span style="color: #001080">canvas</span><span style="color: #000000">.</span><span style="color: #001080">element</span><span style="color: #000000">);</span>
-<span style="color: #000000">}</span>
+<span style="color: #E1E4E8">    </span><span style="color: #6A737D">// Append canvas to the body</span>
+<span style="color: #E1E4E8">    document.body.</span><span style="color: #B392F0">appendChild</span><span style="color: #E1E4E8">(canvas.element);</span>
+<span style="color: #E1E4E8">}</span>
 
-<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">animate</span><span style="color: #000000">() {</span>
-<span style="color: #000000">    </span><span style="color: #795E26">requestAnimationFrame</span><span style="color: #000000">(</span><span style="color: #001080">animate</span><span style="color: #000000">);</span>
-<span style="color: #000000">    </span><span style="color: #001080">mesh</span><span style="color: #000000">.</span><span style="color: #001080">rotation</span><span style="color: #000000"> += </span><span style="color: #098658">0.02</span><span style="color: #000000">;</span>
-<span style="color: #000000">    </span><span style="color: #001080">canvas</span><span style="color: #000000">.</span><span style="color: #795E26">render</span><span style="color: #000000">(</span><span style="color: #001080">scene</span><span style="color: #000000">, </span><span style="color: #001080">camera</span><span style="color: #000000">);</span>
-<span style="color: #000000">}</span>
+<span style="color: #F97583">function</span><span style="color: #E1E4E8"> </span><span style="color: #B392F0">animate</span><span style="color: #E1E4E8">() {</span>
+<span style="color: #E1E4E8">    </span><span style="color: #B392F0">requestAnimationFrame</span><span style="color: #E1E4E8">(animate);</span>
+<span style="color: #E1E4E8">    mesh.rotation </span><span style="color: #F97583">+=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">0.02</span><span style="color: #E1E4E8">;</span>
+<span style="color: #E1E4E8">    canvas.</span><span style="color: #B392F0">render</span><span style="color: #E1E4E8">(scene, camera);</span>
+<span style="color: #E1E4E8">}</span>
 </code></pre>
 			</div>
 		</div>
@@ -218,5 +218,6 @@
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
