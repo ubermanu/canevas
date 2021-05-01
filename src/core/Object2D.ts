@@ -1,4 +1,4 @@
-import { Vector2 } from "../math/Vector2";
+import { Vector2 } from '../math/Vector2'
 
 /**
  * Object2D
@@ -9,39 +9,36 @@ import { Vector2 } from "../math/Vector2";
  * - Position/Rotation/Scale
  * - Visibility
  */
-class Object2D {
+export class Object2D {
+  id: number = Object2DIdCount++
+  type: string = 'Object2D'
 
-  id: number = Object2DIdCount++;
-  type: string = 'Object2D';
+  parent: Object2D | null = null
+  children: Array<Object2D> = []
 
-  parent: Object2D | null = null;
-  children: Array<Object2D> = [];
-
-  position: Vector2 = new Vector2();
-  rotation: number = 0;
-  scale: number = 1;
-  visible: boolean = true;
+  position: Vector2 = new Vector2()
+  rotation: number = 0
+  scale: number = 1
+  visible: boolean = true
 
   /**
-   *
    * @param options
    */
   constructor(options: Object2DOptions = {}) {
-
     if (options.position !== undefined) {
-      this.position = options.position;
+      this.position = options.position
     }
 
     if (options.rotation !== undefined) {
-      this.rotation = options.rotation;
+      this.rotation = options.rotation
     }
 
     if (options.scale !== undefined) {
-      this.scale = options.scale;
+      this.scale = options.scale
     }
 
     if (options.visible !== undefined) {
-      this.visible = options.visible;
+      this.visible = options.visible
     }
   }
 
@@ -52,15 +49,14 @@ class Object2D {
    * @return {this}
    */
   add(object: Object2D) {
-
     if (object.parent !== null) {
-      object.parent.remove(object);
+      object.parent.remove(object)
     }
 
-    object.parent = this;
-    this.children.push(object);
+    object.parent = this
+    this.children.push(object)
 
-    return this;
+    return this
   }
 
   /**
@@ -70,32 +66,29 @@ class Object2D {
    * @return {this}
    */
   remove(object: Object2D) {
+    const index = this.children.indexOf(object)
 
-    var index = this.children.indexOf(object);
-
-    if (index !== - 1) {
-      object.parent = null;
-      this.children.splice(index, 1);
+    if (index !== -1) {
+      object.parent = null
+      this.children.splice(index, 1)
     }
 
-    return this;
+    return this
   }
 }
 
 /**
  * Object2D constructor options.
  */
-interface Object2DOptions {
-  position?: Vector2;
-  rotation?: number;
-  scale?: number;
-  visible?: boolean;
+export interface Object2DOptions {
+  position?: Vector2
+  rotation?: number
+  scale?: number
+  visible?: boolean
 }
 
 /**
  * Unique ID counter.
  * TODO: Use uuid?
  */
-let Object2DIdCount: number = 0;
-
-export { Object2D, Object2DOptions };
+let Object2DIdCount: number = 0

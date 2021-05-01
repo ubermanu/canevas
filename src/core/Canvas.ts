@@ -1,5 +1,5 @@
-import { Camera } from "./Camera";
-import { Scene } from "../objects/Scene";
+import { Camera } from './Camera'
+import { Scene } from '../objects/Scene'
 
 /**
  * Canvas
@@ -7,10 +7,9 @@ import { Scene } from "../objects/Scene";
  * Create a canvas element in the dom
  * then renders a scene using a camera
  */
-class Canvas {
-
-  element: HTMLCanvasElement = document.createElement('canvas');
-  autoClear: boolean = true;
+export class Canvas {
+  element: HTMLCanvasElement = document.createElement('canvas')
+  autoClear: boolean = true
 
   /**
    * Resize the canvas and its container
@@ -19,19 +18,19 @@ class Canvas {
    * @param {number} height
    */
   setSize(width: number, height: number) {
-    this.element.width = width;
-    this.element.height = height;
-    this.element.style.width = width + 'px';
-    this.element.style.height = height + 'px';
+    this.element.width = width
+    this.element.height = height
+    this.element.style.width = width + 'px'
+    this.element.style.height = height + 'px'
   }
 
   /**
    * Clear the canvas
    */
   clear() {
-    const context = this.element.getContext('2d');
+    const context = this.element.getContext('2d')
     if (context) {
-      context.clearRect(0, 0, this.element.width, this.element.height);
+      context.clearRect(0, 0, this.element.width, this.element.height)
     }
   }
 
@@ -42,38 +41,27 @@ class Canvas {
    * @param {Camera} camera
    */
   render(scene: Scene, camera: Camera) {
-
-    const context = this.element.getContext('2d');
+    const context = this.element.getContext('2d')
 
     if (context === null) {
-      return;
-    }
-
-    if (!(scene instanceof Scene)) {
-      console.error('Canvas.render: scene is not an instance of Scene', scene);
-      return;
-    }
-
-    if (!(camera instanceof Camera)) {
-      console.error('Canvas.render: camera is not an instance of Camera', camera);
-      return;
+      return
     }
 
     if (this.autoClear) {
-      this.clear();
+      this.clear()
     }
 
     // Load camera context
-    context.save();
-    context.translate(camera.position.x, camera.position.y);
-    context.rotate(camera.rotation);
-    context.scale(camera.zoom, camera.zoom);
+    context.save()
+    context.translate(camera.position.x, camera.position.y)
+    context.rotate(camera.rotation)
+    context.scale(camera.zoom, camera.zoom)
 
     // Render scene
-    scene.render(context);
+    scene.render(context)
 
     // Restore camera context
-    context.restore();
+    context.restore()
   }
 
   /**
@@ -82,11 +70,9 @@ class Canvas {
    * @param {boolean} smoothing
    */
   setSmoothing(smoothing: boolean) {
-    const context = this.element.getContext('2d');
+    const context = this.element.getContext('2d')
     if (context) {
-      context.imageSmoothingEnabled = smoothing;
+      context.imageSmoothingEnabled = smoothing
     }
   }
 }
-
-export { Canvas };

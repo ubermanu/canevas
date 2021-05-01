@@ -1,4 +1,4 @@
-import { Vector2 } from "../math/Vector2";
+import { Vector2 } from '../math/Vector2'
 
 /**
  * Camera
@@ -6,17 +6,14 @@ import { Vector2 } from "../math/Vector2";
  * A camera gives a global position/rotation/scale for a scene.
  * So it creates a point of view.
  */
-class Camera {
+export class Camera {
+  type: string = 'camera'
 
-  type: string = 'camera';
-
-  position: Vector2 = new Vector2();
-  rotation: number = 0;
-  zoom: number = 1;
+  position: Vector2 = new Vector2()
+  rotation: number = 0
+  zoom: number = 1
 
   constructor(options?: object) {
     // TODO: Use options to set properties
   }
 }
-
-export { Camera };

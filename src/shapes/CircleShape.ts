@@ -1,16 +1,15 @@
-import { Shape } from "../core/Shape";
+import { Shape } from '../core/Shape'
 
 /**
  * CircleShape
  */
-class CircleShape extends Shape {
+export class CircleShape extends Shape {
+  type: string = 'CircleShape'
 
-  type: string = 'CircleShape';
-
-  radius: number;
+  radius: number
 
   constructor(options: CircleShapeOptions = { radius: 1 }) {
-    super();
+    super()
     this.radius = options.radius
   }
 
@@ -25,15 +24,13 @@ class CircleShape extends Shape {
    * Use a custom render function
    */
   render(context: CanvasRenderingContext2D) {
-    context.beginPath();
-    context.arc(0, 0, this.radius, 0, 2 * Math.PI);
-    context.closePath();
+    context.beginPath()
+    context.arc(0, 0, this.radius, 0, 2 * Math.PI)
+    context.closePath()
   }
 }
 
 // CircleShape constructor options.
-interface CircleShapeOptions {
-  radius: number;
+export interface CircleShapeOptions {
+  radius: number
 }
-
-export { CircleShape, CircleShapeOptions };

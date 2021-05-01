@@ -1,25 +1,24 @@
-import { Object2D } from "../core/Object2D";
-import { Shape } from "../core/Shape";
-import { Material } from "../core/Material";
+import { Object2D } from '../core/Object2D'
+import { Shape } from '../core/Shape'
+import { Material } from '../core/Material'
 
 /**
  * Mesh
  *
  * A basic Object2D that handle its shape and its material
  */
-class Mesh extends Object2D {
+export class Mesh extends Object2D {
+  type = 'Mesh'
 
-  type = 'Mesh';
+  children: Mesh[] = []
 
-  children: Mesh[] = [];
-
-  shape: Shape;
-  material: Material;
+  shape: Shape
+  material: Material
 
   constructor(shape: Shape, material: Material, options?: object) {
-    super(options);
-    this.shape = shape;
-    this.material = material;
+    super(options)
+    this.shape = shape
+    this.material = material
   }
 
   /**
@@ -27,26 +26,22 @@ class Mesh extends Object2D {
    * Restore the default context afterwards.
    */
   render(context: CanvasRenderingContext2D) {
-
     // Limit rotation value to a whole 360
-    this.rotation %= (Math.PI / 2);
+    this.rotation %= Math.PI / 2
 
     if (this.visible) {
-
-      context.save();
+      context.save()
 
       // Apply its Object2D properties to the context
-      context.scale(this.scale, this.scale);
-      context.translate(this.position.x, this.position.y);
-      context.rotate(this.rotation);
+      context.scale(this.scale, this.scale)
+      context.translate(this.position.x, this.position.y)
+      context.rotate(this.rotation)
 
       // Render shape and material
-      this.shape.render(context);
-      this.material.render(context);
+      this.shape.render(context)
+      this.material.render(context)
 
-      context.restore();
+      context.restore()
     }
   }
 }
-
-export { Mesh };

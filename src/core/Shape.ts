@@ -5,42 +5,40 @@
  * Then the context handles the position/rotation/scale
  * Contains an array of points position (not used by CircleShape though)
  */
-abstract class Shape {
-
-  type = 'Shape';
+export abstract class Shape {
+  type = 'Shape'
 
   // Contains all the vertices of the shape.
-  // This is a two dimentional array for performances purposes.
-  points: number[][] = [];
+  // This is a two dimensional array for performances purposes.
+  points: number[][] = []
 
   // Auto update dimensions if necessary.
-  autoUpdate = false;
+  autoUpdate = false
 
   // TODO: Implement this method here
-  abstract update(): void;
+  abstract update(): void
 
   /**
    * Renders the points of the shape.
    */
   render(context: CanvasRenderingContext2D) {
-
     // Update if needed
-    if (this.autoUpdate) this.update();
+    if (this.autoUpdate) {
+      this.update()
+    }
 
-    context.beginPath();
+    context.beginPath()
 
     // Draw the path through the points
-    for (var i = 0, l = this.points.length; i < l; i++) {
-      let point = this.points[i];
+    for (let i = 0, l = this.points.length; i < l; i++) {
+      let point = this.points[i]
       if (i === 0) {
-        context.moveTo(point[0], point[1]);
+        context.moveTo(point[0], point[1])
       } else {
-        context.lineTo(point[0], point[1]);
+        context.lineTo(point[0], point[1])
       }
     }
 
-    context.closePath();
+    context.closePath()
   }
 }
-
-export { Shape };
