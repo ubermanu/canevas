@@ -5,47 +5,43 @@ HTML5 Canvas renderer based on [THREE.js](https://github.com/mrdoob/three.js) fo
 
 ### Usage ###
 
-```html
-<script src="cc.min.js"></script>
+```js
+import { BasicMaterial, BoxShape, Camera, Canvas, Mesh, Scene } from "dist/canevas.mjs";
 
-<script>
+let canvas, scene, camera;
+let shape, material, mesh;
 
-    var canvas, scene, camera;
-    var shape, material, mesh;
+init();
+animate();
 
-    init();
-    animate();
+function init() {
 
-    function init () {
+    // Main renderer
+    canvas = new Canvas();
+    canvas.setSize(window.innerWidth, window.innerHeight);
 
-        // Main renderer
-        canvas = new cc.Canvas();
-        canvas.setSize(window.innerWidth, window.innerHeight);
+    // Contains all the meshes to render
+    scene = new Scene();
 
-        // Contains all the meshes to render
-        scene = new cc.Scene();
+    // Will move into the scene
+    camera = new Camera();
+    camera.position.set(window.innerWidth / 2, window.innerHeight / 2);
 
-        // Will move into the scene
-        camera = new cc.Camera();
-        camera.position.set(window.innerWidth / 2, window.innerHeight / 2);
+    // Mesh properties
+    material = new BasicMaterial({ wireframe: true, color: 0xff0000 });
+    shape = new BoxShape({ width: 80, height: 80 });
 
-        // Mesh properties
-        material = new cc.BasicMaterial({ wireframe: true, color: 0xff0000 });
-        shape = new cc.BoxShape({ width: 80, height: 80 });
+    // Add mesh to the scene
+    mesh = new Mesh(shape, material);
+    scene.add(mesh);
 
-        // Add mesh to the scene
-        mesh = new cc.Mesh(shape, material);
-        scene.add(mesh);
+    // Append canvas to the body
+    document.body.appendChild(canvas.element);
+}
 
-        // Append canvas to the body
-        document.body.appendChild(canvas.element);
-    }
-
-    function animate () {
-        requestAnimationFrame(animate);
-        mesh.rotation += 0.02;
-        canvas.render(scene, camera);
-    }
-
-</script>
+function animate() {
+    requestAnimationFrame(animate);
+    mesh.rotation += 0.02;
+    canvas.render(scene, camera);
+}
 ```
