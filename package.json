@@ -1,6 +1,6 @@
 {
   "name": "canevas",
-  "version": "4",
+  "version": "4.1",
   "description": "2D HTML canvas renderer",
   "author": "ubermanu <manu@paca.happy-dev.fr>",
   "license": "MIT",
