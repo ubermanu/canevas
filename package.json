@@ -5,6 +5,10 @@
   "author": "ubermanu <manu@paca.happy-dev.fr>",
   "license": "MIT",
   "repository": "git://github.com/ubermanu/cc.git",
+  "module": "dist/canevas.mjs",
+  "files": [
+    "dist/**"
+  ],
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c -w src"
