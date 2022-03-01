@@ -2,8 +2,6 @@
 
 A small HTML Canvas 2D framework without any dependency.
 
-## Quick start
-
 Check out the [docs](https://ubermanu.github.io/canevas/) for more information.
 
 ```js
