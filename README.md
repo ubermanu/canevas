@@ -7,7 +7,9 @@ A small HTML Canvas 2D framework without any dependency.
 Check out the [docs](https://ubermanu.github.io/canevas/) for more information.
 
 ```js
-import { BasicMaterial, BoxShape, Camera, Canvas, Mesh, Scene } from 'https://cdn.skypack.dev/canevas';
+import {
+    BasicMaterial, BoxShape, Camera, Canvas, Mesh, Scene
+} from 'https://cdn.skypack.dev/canevas';
 
 let canvas, scene, camera;
 let shape, material, mesh;
