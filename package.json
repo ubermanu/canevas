@@ -2,6 +2,12 @@
   "name": "canevas",
   "version": "4.2.0",
   "description": "2D HTML canvas renderer",
+  "keywords": [
+    "canvas",
+    "html",
+    "renderer",
+    "2d"
+  ],
   "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
   "license": "MIT",
   "repository": {
