@@ -1,74 +1,74 @@
 import { ImageMaterial, ImageMaterialOptions } from './ImageMaterial'
+import { Material } from '../core/Material'
 
 /**
- * SpriteMaterial
+ * Loop into multiple images to give an animation.
  *
- * Loop into multiple images to gives an animation
+ * ```js
+ * const material = new SpriteMaterial({
+ *   src: 'sprite.png',
+ *   frameStart: 0,
+ *   frameCount: 4,
+ *   frameRate: 1,
+ *   frameSize: [16, 16],
+ *   frameOffset: [0, 0],
+ *   loop: true
+ * })
+ * ```
  */
 export class SpriteMaterial extends ImageMaterial {
   type: string = 'SpriteMaterial'
 
-  frame: number = 1
-  duration: number = 1
+  frameStart: number = 1
+  frameCount: number = 1
+  frameRate: number = 1
+  frameSize: number[] = [1, 1]
+  frameOffset: number[] = [0, 0]
 
-  x: number = 0
-  y: number = 0
-  width: number = 0
-  height: number = 0
-  length: number = 1
-
-  repeat: boolean = true
+  loop: boolean = true
 
   constructor(options: SpriteMaterialOptions = {}) {
     super(options)
-    this.frame = options.frame ?? this.frame
-    this.duration = options.duration ?? this.duration
-    this.x = options.x ?? this.x
-    this.y = options.y ?? this.y
-    this.width = options.width ?? this.width
-    this.height = options.height ?? this.height
-    this.length = options.length ?? this.length
-    this.repeat = options.repeat ?? this.repeat
+    this.frameStart = options.frameStart ?? this.frameStart
+    this.frameCount = options.frameCount ?? this.frameCount
+    this.frameRate = options.frameRate ?? this.frameRate
+    this.frameSize = options.frameSize ?? this.frameSize
+    this.frameOffset = options.frameOffset ?? this.frameOffset
+    this.loop = options.loop ?? this.loop
   }
 
-  /**
-   * Render the part of an image depending on the frame counter
-   */
+  // TODO: Add direction
   render(context: CanvasRenderingContext2D) {
-    // Call Material initial context rendering
-    super.render(context)
+    Material.prototype.render.call(this, context)
 
     // Increase frame index (in the length range)
-    this.frame += 1 / this.duration
-    this.frame %= this.length
+    this.frameStart += 1 / this.frameRate
+    this.frameStart %= this.frameCount
 
-    // Render image in context
+    const x = this.frameOffset[0]
+    const y = this.frameOffset[1]
+    const width = this.frameSize[0]
+    const height = this.frameSize[1]
+
     context.drawImage(
       this.image,
-
-      this.x + (this.frame | 0) * this.width,
-      this.y,
-
-      this.width,
-      this.height,
-
-      -this.width / 2,
-      -this.height / 2,
-
-      this.width,
-      this.height
+      x + (this.frameStart | 0) * width,
+      y,
+      width,
+      height,
+      width * -0.5,
+      height * -0.5,
+      width,
+      height
     )
   }
 }
 
-// SpriteMaterial constructor options.
 export interface SpriteMaterialOptions extends ImageMaterialOptions {
-  frame?: number
-  duration?: number
-  x?: number
-  y?: number
-  width?: number
-  height?: number
-  length?: number
-  repeat?: boolean
+  frameStart?: number
+  frameSize?: [number, number]
+  frameCount?: number
+  frameRate?: number
+  frameOffset?: [number, number]
+  loop?: boolean
 }
