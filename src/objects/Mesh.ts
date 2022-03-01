@@ -1,7 +1,7 @@
 import { Object2D } from '../core/Object2D'
 import { Shape } from '../core/Shape'
 import { Material } from '../core/Material'
-import { PI05 } from '../math'
+import { PI2 } from '../math'
 
 /**
  * A basic Object2D that handle its shape and its material
@@ -26,7 +26,7 @@ export class Mesh extends Object2D {
    */
   render(context: CanvasRenderingContext2D) {
     // Limit rotation value to a whole 360
-    this.rotation %= PI05
+    this.rotation %= PI2
 
     if (this.visible) {
       context.save()
