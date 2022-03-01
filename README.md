@@ -1,8 +1,10 @@
 # Canevas
 
-HTML Canvas renderer based on [THREE.js](https://github.com/mrdoob/three.js).
+A small HTML Canvas 2D framework without any dependency.
 
-## Example
+## Quick start
+
+Check out the [docs](https://ubermanu.github.io/canevas/) for more information.
 
 ```js
 import { BasicMaterial, BoxShape, Camera, Canvas, Mesh, Scene } from 'https://cdn.skypack.dev/canevas';
