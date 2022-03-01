@@ -9,12 +9,15 @@
       "dom"
     ],
     "declaration": true,
+    "declarationDir": "./types",
+    "emitDeclarationOnly": true,
+    "removeComments": true,
     "strict": true,
-    "outDir": "./dist",
     "rootDir": "./src"
   },
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "types"
   ]
 }
