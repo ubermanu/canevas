@@ -1,12 +1,20 @@
 {
-  "typedocOptions": {
-    "name": "Canevas",
-    "includeVersion": true,
-    "theme": "node_modules/g8-typedoc-dark/default",
-    "highlightTheme": "github-dark",
-    "entryPoints": [
-      "src/index.ts"
+  "compilerOptions": {
+    "target": "es2018",
+    "lib": [
+      "es2018",
+      "es2017",
+      "es7",
+      "es6",
+      "dom"
     ],
-    "out": "docs"
-  }
+    "declaration": true,
+    "strict": true,
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
