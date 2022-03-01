@@ -6,27 +6,23 @@ import { Shape } from '../core/Shape'
 export class BoxShape extends Shape {
   type: string = 'BoxShape'
 
-  width: number = 0
-  height: number = 0
+  width: number = 1.0
+  height: number = 1.0
 
-  constructor(options: BoxShapeOptions = { width: 0, height: 0 }) {
+  constructor(options: BoxShapeOptions = {}) {
     super()
-    this.width = options.width
-    this.height = options.height
+    this.width = options.width ?? this.width
+    this.height = options.height ?? this.height
   }
 
-  update() {
-    // Do nothing
-  }
-
-  render(ctx: CanvasRenderingContext2D) {
-    ctx.beginPath()
-    ctx.rect(-this.width * 0.5, -this.height * 0.5, this.width, this.height)
-    ctx.closePath()
+  render(context: CanvasRenderingContext2D) {
+    context.beginPath()
+    context.rect(-this.width * 0.5, -this.height * 0.5, this.width, this.height)
+    context.closePath()
   }
 }
 
 export interface BoxShapeOptions {
-  width: number
-  height: number
+  width?: number
+  height?: number
 }

@@ -1,6 +1,6 @@
 import { Shape } from '../core/Shape'
 import { Vector2 } from '../math/Vector2'
-import { PI05 } from '../math'
+import { PI2 } from '../math'
 
 /**
  * A shape defined by an array of at least 2 vertices in local coordinates.
@@ -8,35 +8,74 @@ import { PI05 } from '../math'
 export class PolygonShape extends Shape {
   type: string = 'PolygonShape'
 
-  faces: number = 3
-  radius: number = 1
+  _faces: number = 3
+  _radius: number = 1.0
 
-  constructor(options: PolygonShapeOptions) {
+  // Contains all the vertices of the shape.
+  // This is a two-dimensional array for performances purposes.
+  _points: number[][] = []
+
+  constructor(options: PolygonShapeOptions = {}) {
     super()
-    this.faces = options.faces ?? this.faces
-    this.radius = options.radius ?? this.radius
-
-    // Build the points array from properties
-    this.update()
+    // FIXME: Avoid double update on init
+    this.faces = options.faces ?? this._faces
+    this.radius = options.radius ?? this._radius
   }
 
-  // Update points
-  update() {
-    // Angle for each faces
-    const anglePart = PI05 / this.faces
+  render(context: CanvasRenderingContext2D) {
+    context.beginPath()
 
-    // Reset points
-    this.points = []
+    for (let i = 0, l = this._points.length; i < l; i++) {
+      if (i === 0) {
+        context.moveTo(this._points[i][0], this._points[i][1])
+      } else {
+        context.lineTo(this._points[i][0], this._points[i][1])
+      }
+    }
 
-    // For each face, add a point
-    for (let i = 0, l = this.faces; i < l; i++) {
+    context.closePath()
+  }
+
+  /**
+   * Refreshes the polygon cache.
+   * @protected
+   */
+  protected update() {
+    const anglePart = PI2 / this._faces
+    this._points = []
+
+    for (let i = 0, l = this._faces; i < l; i++) {
       const corner = new Vector2(
         Math.cos(i * anglePart),
         Math.sin(i * anglePart)
-      ).multScalar(this.radius)
+      ).multScalar(this._radius)
 
-      this.points.push([corner.x, corner.y])
+      this._points.push([corner.x, corner.y])
     }
+  }
+
+  set faces(value: number) {
+    if (value < 3) {
+      throw new Error('Polygon must have at least 3 faces')
+    }
+    this._faces = value
+    this.update()
+  }
+
+  get faces(): number {
+    return this._faces
+  }
+
+  set radius(value: number) {
+    if (value < 0) {
+      throw new Error('Radius must be greater than 0')
+    }
+    this._radius = value
+    this.update()
+  }
+
+  get radius(): number {
+    return this._radius
   }
 }
 

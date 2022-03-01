@@ -7,15 +7,11 @@ import { PI2 } from '../math'
 export class CircleShape extends Shape {
   type: string = 'CircleShape'
 
-  radius: number
+  radius: number = 1.0
 
-  constructor(options: CircleShapeOptions = { radius: 1 }) {
+  constructor(options: CircleShapeOptions = {}) {
     super()
-    this.radius = options.radius
-  }
-
-  update() {
-    // Do nothing
+    this.radius = options.radius ?? this.radius
   }
 
   render(context: CanvasRenderingContext2D) {
@@ -26,5 +22,5 @@ export class CircleShape extends Shape {
 }
 
 export interface CircleShapeOptions {
-  radius: number
+  radius?: number
 }
