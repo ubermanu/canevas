@@ -5,7 +5,7 @@ HTML Canvas renderer based on [THREE.js](https://github.com/mrdoob/three.js).
 ## Example
 
 ```js
-import { BasicMaterial, BoxShape, Camera, Canvas, Mesh, Scene } from "dist/canevas.mjs";
+import { BasicMaterial, BoxShape, Camera, Canvas, Mesh, Scene } from 'https://cdn.skypack.dev/canevas';
 
 let canvas, scene, camera;
 let shape, material, mesh;
