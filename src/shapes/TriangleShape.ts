@@ -1,9 +1,7 @@
 import { PolygonShape } from './PolygonShape'
 
 /**
- * TriangleShape
- *
- * This polygon must have 3 faces.
+ * A shape representing a single triangle.
  */
 export class TriangleShape extends PolygonShape {
   type: string = 'TriangleShape'

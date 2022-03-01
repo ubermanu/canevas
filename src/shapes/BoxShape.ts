@@ -1,7 +1,7 @@
 import { Shape } from '../core/Shape'
 
 /**
- * BoxShape
+ * A shape representing a square.
  */
 export class BoxShape extends Shape {
   type: string = 'BoxShape'
@@ -19,12 +19,9 @@ export class BoxShape extends Shape {
     this.update()
   }
 
-  /**
-   * Update
-   */
   update() {
-    const w = this.width / 2
-    const h = this.height / 2
+    const w = this.width * 0.5
+    const h = this.height * 0.5
     this.points = [
       [-w, -h],
       [-w, h],
@@ -34,7 +31,6 @@ export class BoxShape extends Shape {
   }
 }
 
-// Constructor options.
 export interface BoxShapeOptions {
   width: number
   height: number

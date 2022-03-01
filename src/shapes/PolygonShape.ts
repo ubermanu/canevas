@@ -1,8 +1,9 @@
 import { Shape } from '../core/Shape'
 import { Vector2 } from '../math/Vector2'
+import { PI05 } from '../math'
 
 /**
- * PolygonShape
+ * A shape defined by an array of at least 2 vertices in local coordinates.
  */
 export class PolygonShape extends Shape {
   type: string = 'PolygonShape'
@@ -22,7 +23,7 @@ export class PolygonShape extends Shape {
   // Update points
   update() {
     // Angle for each faces
-    const anglePart = Math.PI / 2 / this.faces
+    const anglePart = PI05 / this.faces
 
     // Reset points
     this.points = []
@@ -39,7 +40,6 @@ export class PolygonShape extends Shape {
   }
 }
 
-// PolygonShape constructor options
 export interface PolygonShapeOptions {
   faces?: number
   radius?: number

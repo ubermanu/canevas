@@ -1,6 +1,3 @@
-/**
- * Color
- */
 export class Color {
   r: number = 1
   g: number = 1

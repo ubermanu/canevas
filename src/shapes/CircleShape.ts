@@ -1,7 +1,8 @@
 import { Shape } from '../core/Shape'
+import { PI2 } from '../math'
 
 /**
- * CircleShape
+ * A shape representing a circle.
  */
 export class CircleShape extends Shape {
   type: string = 'CircleShape'
@@ -17,20 +18,13 @@ export class CircleShape extends Shape {
     // Do nothing
   }
 
-  /**
-   * Render
-   *
-   * Since the CircleShape does not use points
-   * Use a custom render function
-   */
   render(context: CanvasRenderingContext2D) {
     context.beginPath()
-    context.arc(0, 0, this.radius, 0, 2 * Math.PI)
+    context.arc(0, 0, this.radius, 0, PI2)
     context.closePath()
   }
 }
 
-// CircleShape constructor options.
 export interface CircleShapeOptions {
   radius: number
 }
