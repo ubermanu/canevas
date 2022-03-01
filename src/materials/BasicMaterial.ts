@@ -2,10 +2,11 @@ import { Material, MaterialOptions } from '../core/Material'
 import { Color } from '../math/Color'
 
 /**
- * BasicMaterial
+ * Material that can render lines or faces of a mesh.
  *
- * Material that can render lines
- * or plain content of an Object2D
+ * ```js
+ *  const material = new BasicMaterial({ color: 0xFF0000, wireframe: true, opacity: 0.5 });
+ *  ```
  */
 export class BasicMaterial extends Material {
   type: string = 'BasicMaterial'
@@ -19,11 +20,7 @@ export class BasicMaterial extends Material {
     this.color = options.color ? new Color(options.color) : this.color
   }
 
-  /**
-   * Render
-   */
   render(context: CanvasRenderingContext2D) {
-    // Call Material initial context rendering
     super.render(context)
 
     if (this.wireframe) {
@@ -36,7 +33,6 @@ export class BasicMaterial extends Material {
   }
 }
 
-// BasicMaterial constructor options.
 export interface BasicMaterialOptions extends MaterialOptions {
   wireframe?: boolean
   color?: number

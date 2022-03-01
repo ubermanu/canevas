@@ -1,8 +1,6 @@
 /**
- * Material
- *
- * A material defines the rendered object appearance and visuals
- * For example it can be a color, an image or an animated sprite
+ * A material defines the rendered object appearance and visuals.
+ * For example, it can be a color, an image or an animated sprite.
  */
 export class Material {
   type: string = 'Material'

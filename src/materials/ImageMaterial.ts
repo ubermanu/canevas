@@ -1,9 +1,11 @@
 import { Material, MaterialOptions } from '../core/Material'
 
 /**
- * ImageMaterial
+ * Create a material from an image.
  *
- * Renders a simple image into the rendering context
+ * ```js
+ *  const material = new ImageMaterial({ src: 'image.png', clip: true, opacity: 1.0 });
+ *  ```
  */
 export class ImageMaterial extends Material {
   type: string = 'ImageMaterial'
@@ -17,11 +19,7 @@ export class ImageMaterial extends Material {
     this.image.src = options.src ?? this.image.src
   }
 
-  /**
-   * Render
-   */
   render(context: CanvasRenderingContext2D) {
-    // Call Material initial context rendering
     super.render(context)
 
     // Crop the image to fit in the shape
@@ -35,7 +33,6 @@ export class ImageMaterial extends Material {
   }
 }
 
-// ImageMaterial constructor options.
 export interface ImageMaterialOptions extends MaterialOptions {
   clip?: boolean
   src?: string
