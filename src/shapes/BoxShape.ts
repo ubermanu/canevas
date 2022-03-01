@@ -11,23 +11,18 @@ export class BoxShape extends Shape {
 
   constructor(options: BoxShapeOptions = { width: 0, height: 0 }) {
     super()
-
     this.width = options.width
     this.height = options.height
-
-    // Build the points array from properties
-    this.update()
   }
 
   update() {
-    const w = this.width * 0.5
-    const h = this.height * 0.5
-    this.points = [
-      [-w, -h],
-      [-w, h],
-      [w, h],
-      [w, -h],
-    ]
+    // Do nothing
+  }
+
+  render(ctx: CanvasRenderingContext2D) {
+    ctx.beginPath()
+    ctx.rect(-this.width * 0.5, -this.height * 0.5, this.width, this.height)
+    ctx.closePath()
   }
 }
 
