@@ -25,12 +25,10 @@ export class PolygonShape extends Shape {
   render(context: CanvasRenderingContext2D) {
     context.beginPath()
 
-    for (let i = 0, l = this._points.length; i < l; i++) {
-      if (i === 0) {
-        context.moveTo(this._points[i][0], this._points[i][1])
-      } else {
-        context.lineTo(this._points[i][0], this._points[i][1])
-      }
+    context.moveTo(this._points[0][0], this._points[0][1])
+
+    for (let i = 1, l = this._points.length; i < l; i++) {
+      context.lineTo(this._points[i][0], this._points[i][1])
     }
 
     context.closePath()
